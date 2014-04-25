@@ -2,7 +2,14 @@
 <resources>
 
     <string name="app_name">followTeam</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+     <string-array name="optionsMenu">
+        <item>Login</item>
+        <item>Registrati</item>
+        <item>Classifica</item>
+        <item>News</item>
+        <item>Calendario</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 </resources>
