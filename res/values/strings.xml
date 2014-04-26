@@ -11,5 +11,10 @@
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="usernameLabel">Username</string>
+    <string name="passwordLabel">Password</string>
+    <string name="buttonLoginLabel">Login</string>
+    <string name="passwordLabelConferma">Conferma password</string>
+    <string name="buttonRegistrati">Registrati</string>
 
 </resources>

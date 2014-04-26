@@ -1,4 +1,4 @@
-package gestioneAutenticazione;
+package it.unisa.gestioneAutenticazione;
 
 public class Account {
 

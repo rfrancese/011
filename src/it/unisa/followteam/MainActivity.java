@@ -110,12 +110,22 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = new ActivityFragment();
-        Bundle args = new Bundle();
-        args.putInt(ActivityFragment.ARG_OPTIONS, position);
-        fragment.setArguments(args);
-
+    	
+    	String choice = getResources().getStringArray(R.array.optionsMenu)[position];
+       	Fragment fragment= new LoginFragment();
+     
+       	switch(choice){
+        case "Login":
+        	fragment = new LoginFragment();
+        	break;
+        case "Registrati":
+        	fragment=new RegistrazioneFragment();
+        	break;
+        default: 
+        	Toast.makeText(this, choice, Toast.LENGTH_LONG).show();
+        	break;
+        }
+       
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
@@ -150,25 +160,5 @@ public class MainActivity extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    /**
-     * Fragment that appears in the "content_frame", shows a planet
-     */
-    public static class ActivityFragment extends Fragment {
-        public static final String ARG_OPTIONS = "option_number";
-
-        public ActivityFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
-            int i = getArguments().getInt(ARG_OPTIONS);
-            String choice = getResources().getStringArray(R.array.optionsMenu)[i];
-            Toast.makeText(rootView.getContext(), choice, Toast.LENGTH_LONG).show();
-          
-            return rootView;
-        }
-    }
+    
 }
