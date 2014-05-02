@@ -19,21 +19,23 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
-    private DrawerLayout mDrawerLayout;
+public class HomeLogin extends Activity {
+	
+	private DrawerLayout mDrawerLayout;
     private ListView listaOpzioni;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence titoloLista;
     private CharSequence titolo;
     private String[] opzioni;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
         titolo = titoloLista = getTitle();
-        opzioni = getResources().getStringArray(R.array.optionsMenu);
+        opzioni = getResources().getStringArray(R.array.optionsMenuLogin);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listaOpzioni = (ListView) findViewById(R.id.left_drawer);
 
@@ -116,13 +118,14 @@ public class MainActivity extends Activity {
        	Fragment fragment= new LoginFragment();
      
        	switch(scelta){
-        case "Login":
+      /*  case "Calendario":
         	fragment = new LoginFragment();
         	
         	break;
-        case "Registrati":
+        case "Profilo":
         	fragment=new RegistrazioneFragment();
         	break;
+        */
         default: 
         	Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
         	break;
@@ -155,6 +158,4 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    
 }

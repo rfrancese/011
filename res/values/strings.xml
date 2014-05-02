@@ -9,6 +9,12 @@
         <item>News</item>
         <item>Calendario</item>
     </string-array>
+      <string-array name="optionsMenuLogin">
+        <item>Calendario</item>
+        <item>Profilo</item>
+        <item>News</item>
+        <item>Classifica</item>
+    </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="usernameLabel">Username</string>

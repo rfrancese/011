@@ -1,4 +1,4 @@
-package it.unisa.followteam;
+package it.unisa.followteam.database;
 
 
 import java.io.BufferedReader;
@@ -99,14 +99,14 @@ public class MyDatabase {
                 return mDb.query(StadioMetaData.STADIO_TABLE, null,null,null,null,null,null);               
         }
 
-        static class StadioMetaData {  // i metadati della tabella, accessibili ovunque
-                static final String STADIO_TABLE = "stadio";
-                static final String STADIO_ID = "_id";
-                static final String STADIO_NOME_SQUADRA = "nomeSquadra";
-                static final String STADIO_NOME_STADIO = "nomeStadio";
-                static final String STADIO_INDIRIZZO = "indirizzo";
-                static final String STADIO_LONG = "longitudine";
-                static final String STADIO_LAT = "latitudine";
+        public static class StadioMetaData {  // i metadati della tabella, accessibili ovunque
+               public static final String STADIO_TABLE = "stadio";
+               public static final String STADIO_ID = "_id";
+               public static final String STADIO_NOME_SQUADRA = "nomeSquadra";
+               public static final String STADIO_NOME_STADIO = "nomeStadio";
+               public static final String STADIO_INDIRIZZO = "indirizzo";
+               public static final String STADIO_LONG = "longitudine";
+               public static final String STADIO_LAT = "latitudine";
                 
         }
 
