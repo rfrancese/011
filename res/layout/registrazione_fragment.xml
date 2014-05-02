@@ -46,15 +46,15 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/passwordConferma"
         android:layout_marginTop="32dp"
-        android:drawSelectorOnTop="true" />
+        android:drawSelectorOnTop="true" 
+        />
 
     <Button
         android:id="@+id/buttonRegistrazione"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
-        android:text="@string/buttonRegistrati" />
+        android:text="@string/buttonRegistrati"
+        style="@style/button" />
 
 </RelativeLayout>
