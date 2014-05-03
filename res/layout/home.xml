@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/benvenuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/benvenutoLabel" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/benvenuto"
+        android:layout_alignBottom="@+id/benvenuto"
+        android:layout_centerHorizontal="true"
+        android:text="@string/usernameLabel" />
+
+    <ImageView
+        android:id="@+id/imageSquadra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginRight="43dp"
+        android:src="@drawable/ic_launcher" />
+
+    <Spinner
+        android:id="@+id/spinnerGiornate"
+        android:textAlignment="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageSquadra"
+        android:layout_marginTop="22dp"
+        android:drawSelectorOnTop="true" />
+
+    <ListView
+        android:id="@+id/listaPartite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerGiornate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp" >
+    </ListView>
+
+</RelativeLayout>

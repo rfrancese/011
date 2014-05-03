@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="it.unisa.followteam.HomeLogin">
+        <activity android:name="it.unisa.followteam.HomeActivity">
 		</activity>
     </application>
 

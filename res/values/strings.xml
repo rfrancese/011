@@ -22,5 +22,7 @@
     <string name="buttonLoginLabel">Login</string>
     <string name="passwordLabelConferma">Conferma password</string>
     <string name="buttonRegistrati">Registrati</string>
-
+	<string name="benvenutoLabel">Benvenuto</string>
+    
+    
 </resources>
