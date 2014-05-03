@@ -12,11 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
-public class RegistrazioneFragment extends Fragment {
+public class Registrazione extends Fragment {
 
 	 private MyDatabase db;
 	
-	 public RegistrazioneFragment() {
+	 public Registrazione() {
 	    }
 
 	    @Override

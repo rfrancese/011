@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class LoginFragment extends Fragment {
+public class Login extends Fragment {
 	
 	Button buttonLogin;
 	
-    public LoginFragment() {
+    public Login() {
         // Empty constructor required for fragment subclasses
     }
 
@@ -29,9 +29,8 @@ public class LoginFragment extends Fragment {
  		@Override
 		public void onClick(View v) {
  			
- 			Intent login= new Intent(rootView.getContext(), HomeLogin.class);
+ 			Intent login= new Intent(rootView.getContext(), HomeActivity.class);
  			startActivity(login);				
- 			
  			}
  		});
         return rootView;

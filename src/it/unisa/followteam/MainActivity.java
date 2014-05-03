@@ -113,15 +113,15 @@ public class MainActivity extends Activity {
     private void selezionaItem(int posizione) {
     	
     	String scelta = getResources().getStringArray(R.array.optionsMenu)[posizione];
-       	Fragment fragment= new LoginFragment();
+       	Fragment fragment= new Login();
      
        	switch(scelta){
         case "Login":
-        	fragment = new LoginFragment();
+        	fragment = new Login();
         	
         	break;
         case "Registrati":
-        	fragment=new RegistrazioneFragment();
+        	fragment=new Registrazione();
         	break;
         default: 
         	Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();

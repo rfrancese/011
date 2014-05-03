@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class HomeLogin extends Activity {
+public class HomeActivity extends Activity {
 	
 	private DrawerLayout mDrawerLayout;
     private ListView listaOpzioni;
@@ -115,14 +115,14 @@ public class HomeLogin extends Activity {
     private void selezionaItem(int posizione) {
     	
     	String scelta = getResources().getStringArray(R.array.optionsMenu)[posizione];
-       	Fragment fragment= new LoginFragment();
+       	Fragment fragment= new Calendario();
      
        	switch(scelta){
-      /*  case "Calendario":
-        	fragment = new LoginFragment();
+      	case "Calendario":
+        	fragment = new Calendario();
         	
         	break;
-        case "Profilo":
+        /*case "Profilo":
         	fragment=new RegistrazioneFragment();
         	break;
         */
