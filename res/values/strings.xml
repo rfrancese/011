@@ -24,6 +24,10 @@
     <string name="passwordLabelConferma">Conferma password</string>
     <string name="buttonRegistrati">Registrati</string>
 	<string name="benvenutoLabel">Benvenuto</string>
+	<string name="buttonModifica">Modifica profilo</string>
+	<string name="buttonElimina">Elimina profilo</string>
+	<string name="buttonConfermaModifica">Conferma modifiche</string>
+	
     
     
 </resources>

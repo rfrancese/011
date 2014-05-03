@@ -123,10 +123,10 @@ public class HomeActivity extends Activity {
         	fragment = new Calendario();
         	
         	break;
-      /*case "Profilo":
-        	fragment=new RegistrazioneFragment();
+      	case "Profilo":
+        	fragment=new Profilo();
         	break;
-        case "News" :
+        /*case "News" :
         	fragment=new RegistrazioneFragment();
         	break;
         case "Classifica" : 
