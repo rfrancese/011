@@ -30,7 +30,8 @@ public class Login extends Fragment {
 		public void onClick(View v) {
  			
  			Intent login= new Intent(rootView.getContext(), HomeActivity.class);
- 			startActivity(login);	
+ 			startActivity(login);
+ 			getActivity().finish();
  			
  			}
  		});

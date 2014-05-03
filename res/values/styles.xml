@@ -19,7 +19,7 @@
         <item name="android:color">#FFFFFF</item>
         
     </style>
-    <style name="FollowTeamTheme">
+    <style name="FollowTeamTheme" parent="@android:style/Theme.Light">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
 	<style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">

@@ -4,6 +4,7 @@ package it.unisa.followteam;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -114,7 +115,7 @@ public class HomeActivity extends Activity {
 
     private void selezionaItem(int posizione) {
     	
-    	String scelta = getResources().getStringArray(R.array.optionsMenu)[posizione];
+    	String scelta = getResources().getStringArray(R.array.optionsMenuLogin)[posizione];
        	Fragment fragment= new Calendario();
      
        	switch(scelta){
@@ -122,10 +123,22 @@ public class HomeActivity extends Activity {
         	fragment = new Calendario();
         	
         	break;
-        /*case "Profilo":
+      /*case "Profilo":
+        	fragment=new RegistrazioneFragment();
+        	break;
+        case "News" :
+        	fragment=new RegistrazioneFragment();
+        	break;
+        case "Classifica" : 
         	fragment=new RegistrazioneFragment();
         	break;
         */
+      	case "Logout" :
+      		Intent main= new Intent(this, MainActivity.class);
+ 			startActivity(main);
+ 			//cancellazione variabile account
+ 			finish();
+ 			break;
         default: 
         	Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
         	break;
