@@ -23,7 +23,7 @@ public class Calendario  extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
-    	final View rootView = inflater.inflate(R.layout.home, container, false);
+    	final View rootView = inflater.inflate(R.layout.calendario, container, false);
     	
     	if(db == null)
     		db=new MyDatabase(rootView.getContext());
@@ -41,14 +41,6 @@ public class Calendario  extends Fragment {
 		
 		c.close();
 	    ArrayAdapter<String> adapter=new ArrayAdapter<String>(rootView.getContext(),R.layout.list_item,giornate);
-	    /*SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-	    		rootView.getContext(), 
-	    		R.layout.list_item, 
-	    		c, 
-	    		new String[]{MyDatabase.GiornataMetaData.GIORNATA_ID}, 
-	    		new int[] {R.id.textView1},
-	    		1);
-	    */
 	    lista.setAdapter(adapter);
 	    
 	    db.close();

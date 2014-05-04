@@ -20,7 +20,7 @@ public class Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
-    	final View rootView = inflater.inflate(R.layout.login_fragment, container, false);
+    	final View rootView = inflater.inflate(R.layout.login, container, false);
     	 //bottone login apertura intent
         
         buttonLogin=(Button) rootView.findViewById(R.id.buttonLogin);

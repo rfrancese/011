@@ -23,7 +23,7 @@ public class Registrazione extends Fragment {
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {
 	    
-	    	View rootView = inflater.inflate(R.layout.registrazione_fragment, container, false);
+	    	View rootView = inflater.inflate(R.layout.registrazione, container, false);
 	    	
 	    	if(db == null)
 	    		db=new MyDatabase(rootView.getContext());
