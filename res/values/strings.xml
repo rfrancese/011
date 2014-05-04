@@ -27,6 +27,8 @@
 	<string name="buttonModifica">Modifica profilo</string>
 	<string name="buttonElimina">Elimina profilo</string>
 	<string name="buttonConfermaModifica">Conferma modifiche</string>
+	<string name="giornataLabel">Giornata </string>
+	<string name="separatore"> - </string>
 	
     
     

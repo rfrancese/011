@@ -29,7 +29,7 @@ public class ModificaProfilo extends Fragment {
 	     
 	    SimpleCursorAdapter adapter = new SimpleCursorAdapter(
 	    		rootView.getContext(), 
-	    		R.layout.list_item, 
+	    		R.layout.list_item_spinner_squadra, 
 	    		c, 
 	    		new String[]{MyDatabase.StadioMetaData.STADIO_NOME_SQUADRA}, 
 	    		new int[] {R.id.textView1},

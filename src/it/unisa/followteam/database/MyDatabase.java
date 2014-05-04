@@ -151,7 +151,9 @@ public class MyDatabase {
             return mDb.query(PartiteMetaData.PARTITA_TITLE_TABLE, null,null,null,null,null,null);               
         }
 
-
+        public Cursor query(String sql,String[] selectionArgs){
+        	return mDb.rawQuery(sql, selectionArgs);
+        }
 
         public static class StadioMetaData {  // i metadati della tabella, accessibili ovunque
                public static final String STADIO_TITLE_TABLE = "stadio";
