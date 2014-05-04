@@ -22,6 +22,7 @@ public class Calendario  extends Fragment {
 	private MyDatabase db;
 	private Spinner spinner;
 	private ListView listaPartite;
+	private String giornataScelta;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
@@ -51,7 +52,8 @@ public class Calendario  extends Fragment {
 	    	 @Override
 	    	    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 	    		 	Cursor cursor = (Cursor) arg0.getItemAtPosition(arg2);
-	    		 	String giornataScelta = cursor.getString(0);
+	    		 	giornataScelta = cursor.getString(0);
+	    		 	
 	    		 	
 	    		 	db.open();
 	    		 	String sql="SELECT "+ MyDatabase.PartiteMetaData.PARTITA_ID
@@ -90,14 +92,14 @@ public class Calendario  extends Fragment {
 				Cursor c=(Cursor)parent.getItemAtPosition(position);
 				String sqCasa=c.getString(1);
 				String sqOspite=c.getString(2);
-				Toast.makeText(view.getContext(), sqCasa+" "+sqOspite, Toast.LENGTH_LONG).show();
 				
 				Bundle args = new Bundle();
-				//args.putInt(MyDatabase.PartiteMetaData.PARTITA_SQ_CASA, sqCasa);
-				
+				args.putString(MyDatabase.PartiteMetaData.PARTITA_SQ_CASA, sqCasa);
+				args.putString(MyDatabase.PartiteMetaData.PARTITA_SQ_OSPITE, sqOspite);
+				args.putString(MyDatabase.PartiteMetaData.PARTITA_IDGIORNATA,giornataScelta);
 				Fragment fragment =new DettagliPartita();
 	 			FragmentManager fragmentManager = getFragmentManager();
-	 			
+	 			fragment.setArguments(args);
 	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
 				
