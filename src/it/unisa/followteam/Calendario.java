@@ -3,6 +3,7 @@ package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -90,6 +91,15 @@ public class Calendario  extends Fragment {
 				String sqCasa=c.getString(1);
 				String sqOspite=c.getString(2);
 				Toast.makeText(view.getContext(), sqCasa+" "+sqOspite, Toast.LENGTH_LONG).show();
+				
+				Bundle args = new Bundle();
+				//args.putInt(MyDatabase.PartiteMetaData.PARTITA_SQ_CASA, sqCasa);
+				
+				Fragment fragment =new DettagliPartita();
+	 			FragmentManager fragmentManager = getFragmentManager();
+	 			
+	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
 				
 			}
 	    	

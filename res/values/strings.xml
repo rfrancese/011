@@ -29,6 +29,8 @@
 	<string name="buttonConfermaModifica">Conferma modifiche</string>
 	<string name="giornataLabel">Giornata </string>
 	<string name="separatore"> - </string>
+	<string name="buttonPercorsoLabel">Percorso</string>
+	<string name="buttonAlloggioLabel">Alloggio</string>
 	
     
     
