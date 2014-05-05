@@ -127,12 +127,13 @@ public class HomeActivity extends ActionBarActivity {
       	case "Profilo":
         	fragment=new Profilo();
         	break;
+      	 case "Classifica" : 
+         	fragment=new Classifica();
+         	break;
         /*case "News" :
         	fragment=new RegistrazioneFragment();
         	break;
-        case "Classifica" : 
-        	fragment=new RegistrazioneFragment();
-        	break;
+       
         */
       	case "Logout" :
       		Intent main= new Intent(this, MainActivity.class);

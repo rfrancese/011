@@ -19,13 +19,17 @@ public class DettagliPartita extends Fragment {
 	private MyDatabase db;
 	private Button buttonPercorso;
 	private Button buttonAlloggio;
+	private String indirizzoStadio;
+	private String latitudine;
+	private String longitudine;
+	private int iconSqCasa;
+	public static final String ICON_SQUADRA_CASA="icona_sq_casa";
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
 		final View rootView = inflater.inflate(R.layout.dettaglipartita, container, false);
 		getActivity().getActionBar().setTitle("Dettagli Partita");
 
-		main();
 		Bundle args = getArguments();
 		
 		String sqCasa = args.getString(MyDatabase.PartiteMetaData.PARTITA_SQ_CASA);
@@ -51,7 +55,7 @@ public class DettagliPartita extends Fragment {
 			sqOspite = sq[0] + sq[1];
 		}
 		
-		int iconSqCasa = getResources().getIdentifier(sqCasa.toLowerCase(), "drawable",getActivity().getPackageName());
+		iconSqCasa = getResources().getIdentifier(sqCasa.toLowerCase(), "drawable",getActivity().getPackageName());
 		int iconSqOspite = getResources().getIdentifier(sqOspite.toLowerCase(), "drawable",getActivity().getPackageName());
 
 		imageSqCasa.setImageResource(iconSqCasa);
@@ -68,13 +72,15 @@ public class DettagliPartita extends Fragment {
     				+" FROM "+MyDatabase.GiornataMetaData.GIORNATA_TITLE_TABLE
     				+" WHERE "+MyDatabase.GiornataMetaData.GIORNATA_ID
     				+"='"+idGiornata+"'";
-    				
+    	//controllare
     	Cursor c = db.query(sql, null);
     	c.moveToFirst();
     	String dataPartita =c.getString(0);
-    	
+    	c=null;
     	sql="SELECT "+ MyDatabase.StadioMetaData.STADIO_NOME_STADIO
     		+", "+ MyDatabase.StadioMetaData.STADIO_INDIRIZZO
+    		+", "+ MyDatabase.StadioMetaData.STADIO_LAT
+    		+", "+ MyDatabase.StadioMetaData.STADIO_LONG
     		+" FROM "+ MyDatabase.StadioMetaData.STADIO_TITLE_TABLE
     		+" WHERE "+MyDatabase.StadioMetaData.STADIO_NOME_SQUADRA
     		+"='"+sqCasa+"'";
@@ -82,34 +88,46 @@ public class DettagliPartita extends Fragment {
     	c = db.query(sql, null);
     	c.moveToFirst();
     	String nomeStadio = c.getString(0);
-    	String indirizzoStadio = c.getString(1);
-    	
+    	indirizzoStadio = c.getString(1);
+    	latitudine=c.getString(2);
+    	longitudine=c.getString(3);
+    	c.close();
     	descrizione.setText(dataPartita+"\n"+ nomeStadio+ "\n"+ indirizzoStadio);
     	
+    	//Gestione button Percorso
     	buttonPercorso =(Button)rootView.findViewById(R.id.buttonPercorso);
     	buttonPercorso.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
+				Bundle args = new Bundle();
+				
+				args.putString(MyDatabase.StadioMetaData.STADIO_INDIRIZZO,indirizzoStadio);
+				args.putString(MyDatabase.StadioMetaData.STADIO_LAT, latitudine);
+				args.putString(MyDatabase.StadioMetaData.STADIO_LONG, longitudine);
+				args.putInt(DettagliPartita.ICON_SQUADRA_CASA, iconSqCasa);
 				
 	 			FragmentManager fragmentManager = getFragmentManager();
-	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, new MappaPercorso()).commit();
+	 			Fragment fragment =new MappaPercorso();
+	 			fragment.setArguments(args);
+	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 			}
 		});
     	
+    	// Gestione Button Alloggio
     	buttonAlloggio =(Button)rootView.findViewById(R.id.buttonAlloggio);
     	buttonAlloggio.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Fragment fragment =new MappaPercorso();
+				
+				Bundle args = new Bundle();
+				
+				Fragment fragment =new MappaAlloggio();
 	 			FragmentManager fragmentManager = getFragmentManager();
 	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 			}
 		});
 		return rootView;
 	}
-	
-	public void main(){
-		
-	}
+
 }
