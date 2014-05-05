@@ -1,21 +1,24 @@
 package it.unisa.followteam;
 
 
-import java.lang.reflect.Field;
 
 import it.unisa.followteam.database.MyDatabase;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DettagliPartita extends Fragment {
 	
 	private MyDatabase db;
+	private Button buttonPercorso;
+	private Button buttonAlloggio;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
@@ -83,6 +86,26 @@ public class DettagliPartita extends Fragment {
     	
     	descrizione.setText(dataPartita+"\n"+ nomeStadio+ "\n"+ indirizzoStadio);
     	
+    	buttonPercorso =(Button)rootView.findViewById(R.id.buttonPercorso);
+    	buttonPercorso.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				
+	 			FragmentManager fragmentManager = getFragmentManager();
+	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, new MappaPercorso()).commit();
+			}
+		});
+    	
+    	buttonAlloggio =(Button)rootView.findViewById(R.id.buttonAlloggio);
+    	buttonAlloggio.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Fragment fragment =new MappaPercorso();
+	 			FragmentManager fragmentManager = getFragmentManager();
+	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+			}
+		});
 		return rootView;
 	}
 	

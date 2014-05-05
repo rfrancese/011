@@ -1,9 +1,9 @@
 package it.unisa.followteam;
 
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends ActionBarActivity {
 	
 	private DrawerLayout mDrawerLayout;
     private ListView listaOpzioni;
@@ -81,6 +81,7 @@ public class HomeActivity extends Activity {
         if (savedInstanceState == null) {
             selezionaItem(0); //seleziona di default il primo elemento delle opzioni
         }
+        
        
     }
 
@@ -144,7 +145,7 @@ public class HomeActivity extends Activity {
         	break;
         }
        
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         // aggiorna il titolo e l'item selezionato e chiude il menu

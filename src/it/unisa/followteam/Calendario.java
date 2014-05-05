@@ -2,8 +2,8 @@ package it.unisa.followteam;
 
 
 import it.unisa.followteam.database.MyDatabase;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
