@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
     private CharSequence titoloLista;
     private CharSequence titolo;
-    private String[] opzioni;
+    private String[] opzioni;	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,23 +13,15 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="137dp"
         android:layout_marginTop="70dp"
-        android:text="@string/usernameLabel" />
-
-    <TextView
-        android:id="@+id/squadra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/usernameProfilo"
-        android:layout_below="@+id/usernameProfilo"
-        android:layout_marginTop="56dp"/>
+         />
 
     <Button
         android:id="@+id/buttonModificaProfilo"
         style="@style/button"
-        android:layout_below="@+id/squadra"
+        android:layout_below="@+id/squadraProfilo"
         android:layout_marginRight="23dp"
         android:layout_marginTop="62dp"
-        android:layout_toLeftOf="@+id/squadra"
+        android:layout_toLeftOf="@+id/squadraProfilo"
         android:text="@string/buttonModifica" />
 
     <Button
@@ -41,5 +33,23 @@
         android:layout_marginLeft="11dp"
         android:layout_toRightOf="@+id/usernameProfilo"
         android:text="@string/buttonElimina" />
+
+    <ImageView
+        android:id="@+id/imageSquadraProfilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/usernameProfilo"
+        android:layout_below="@+id/usernameProfilo"
+        android:layout_marginTop="37dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/squadraProfilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageSquadraProfilo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/usernameLabel" />
 
 </RelativeLayout>

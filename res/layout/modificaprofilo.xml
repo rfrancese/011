@@ -7,13 +7,13 @@
 
     <EditText
         android:id="@+id/confermaPassProfilo"
-        android:hint="@string/passwordLabelConferma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/modPassProfilo"
         android:layout_below="@+id/modPassProfilo"
         android:layout_marginTop="38dp"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonConfermaModifica"
@@ -33,7 +33,7 @@
         android:layout_alignRight="@+id/buttonConfermaModifica"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="@string/passwordLabel" >
+        android:inputType="textPassword" >
 
         <requestFocus />
     </EditText>

@@ -1,6 +1,7 @@
 package it.unisa.followteam;
 
 
+import it.unisa.gestioneAutenticazione.Account;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,11 +30,15 @@ public class HomeActivity extends ActionBarActivity {
     private CharSequence titoloLista;
     private CharSequence titolo;
     private String[] opzioni;
-
+    public static Account ACCOUNT;
+    
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        String pkg=getPackageName();
+        ACCOUNT = (Account) getIntent().getSerializableExtra(pkg+".myAccount");
         
         titolo = titoloLista = getTitle();
         opzioni = getResources().getStringArray(R.array.optionsMenuLogin);
@@ -122,7 +127,6 @@ public class HomeActivity extends ActionBarActivity {
        	switch(scelta){
       	case "Calendario":
         	fragment = new Calendario();
-        	
         	break;
       	case "Profilo":
         	fragment=new Profilo();

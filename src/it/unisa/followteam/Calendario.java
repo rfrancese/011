@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 public class Calendario  extends Fragment {
-	
+
 	private MyDatabase db;
 	private Spinner spinner;
 	private ListView listaPartite;
@@ -44,7 +44,7 @@ public class Calendario  extends Fragment {
 	    		new int[] {R.id.idGiornata},
 	    		1);
 	    spinner.setAdapter(adapter);
-	    
+
 	    db.close();
 
 	    spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -52,8 +52,8 @@ public class Calendario  extends Fragment {
 	    	    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 	    		 	Cursor cursor = (Cursor) arg0.getItemAtPosition(arg2);
 	    		 	giornataScelta = cursor.getString(0);
-	    		 	
-	    		 	
+
+
 	    		 	db.open();
 	    		 	String sql="SELECT "+ MyDatabase.PartiteMetaData.PARTITA_ID
 	    		 			+", "+MyDatabase.PartiteMetaData.PARTITA_SQ_CASA
@@ -62,7 +62,7 @@ public class Calendario  extends Fragment {
 	    		 			+ " WHERE "+MyDatabase.PartiteMetaData.PARTITA_IDGIORNATA
 	    		 			+ "='"+giornataScelta+"'";
 	    		 	Cursor c = db.query(sql, null);
-	    		 	
+
 	    		 	SimpleCursorAdapter adapter = new SimpleCursorAdapter(
 	    			    		rootView.getContext(), 
 	    			    		R.layout.list_item_view_partite, 
@@ -70,11 +70,11 @@ public class Calendario  extends Fragment {
 	    			    		new String[]{MyDatabase.PartiteMetaData.PARTITA_SQ_CASA, MyDatabase.PartiteMetaData.PARTITA_SQ_OSPITE}, 
 	    			    		new int[] {R.id.sqCasa, R.id.sqOspite},
 	    			    		1);
-	    			    
-	    			
+
+
 	    		 	listaPartite.setAdapter(adapter);
 	    			db.close();
-	    	 
+
 	    	 	}
 
 	    	    @Override
@@ -82,7 +82,7 @@ public class Calendario  extends Fragment {
 	    	        // TODO Auto-generated method stub
 	    	    }   
 	    });
-	    
+
 	    listaPartite.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -91,7 +91,7 @@ public class Calendario  extends Fragment {
 				Cursor c=(Cursor)parent.getItemAtPosition(position);
 				String sqCasa=c.getString(1);
 				String sqOspite=c.getString(2);
-				
+
 				Bundle args = new Bundle();
 				args.putString(MyDatabase.PartiteMetaData.PARTITA_SQ_CASA, sqCasa);
 				args.putString(MyDatabase.PartiteMetaData.PARTITA_SQ_OSPITE, sqOspite);
@@ -101,15 +101,15 @@ public class Calendario  extends Fragment {
 	 			fragment.setArguments(args);
 	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-				
+
 			}
-	    	
+
 		});
-	    
-	    
-	   
+
+
+
 	    return rootView;
     }
-	
+
 
 }

@@ -1,10 +1,20 @@
 package it.unisa.gestioneAutenticazione;
 
-public class Account {
+import java.io.Serializable;
 
+public class Account implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private String squadra;
+	
+	public Account (){
+		
+	}
 	
 	public Account(String user, String pass, String squad){
 		
@@ -15,26 +25,30 @@ public class Account {
 	}
 	
 	public String getUsername(){
-		return username;
+		return this.username;
 	}
 	
 	public void setUsername(String user){
-		username=user;
+		this.username=user;
 	}
 	
 	public String getPassword(){
-		return password;
+		return this.password;
 	}
 	
 	public void setPassword(String pass){
-		password=pass;
+		this.password=pass;
 	}
 	
 	public String getSquadra(){
-		return squadra;
+		return this.squadra;
 	}
 	
 	public void setSquadra(String squadra){
 		this.squadra=squadra;
+	}
+	
+	public String toString(){
+		return getUsername()+"."+getPassword()+"."+getSquadra();
 	}
 }
