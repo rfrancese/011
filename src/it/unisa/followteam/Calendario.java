@@ -61,8 +61,8 @@ public class Calendario  extends Fragment {
     }
 
 	public void aggiungiSpecifiche(){
-		TextView userlabel = (TextView) getView().findViewById(R.id.username);
-		ImageView imageTeam = (ImageView) getView().findViewById(R.id.imageSquadra);
+		TextView userlabel = (TextView) rootView.findViewById(R.id.username);
+		ImageView imageTeam = (ImageView) rootView.findViewById(R.id.imageSquadra);
 		userlabel.setText(HomeActivity.ACCOUNT.getUsername());
 	    String nomeSquadra = HomeActivity.ACCOUNT.getSquadra();
 	    int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),"drawable", getActivity().getPackageName());
