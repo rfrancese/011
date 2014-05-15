@@ -118,13 +118,15 @@ public class MainActivity extends ActionBarActivity {
        	switch(scelta){
         case "Login":
         	fragment = new Login();
-        	
         	break;
         case "Registrati":
         	fragment=new Registrazione();
         	break;
         case "Classifica":
         	fragment =new Classifica();
+        	break;
+        case "Calendario":
+        	fragment =new CalendariOff();
         	break;
         default: 
         	Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();

@@ -22,12 +22,13 @@ public class Calendario  extends Fragment {
 
 	private MyDatabase db;
 	private Spinner spinner;
-	private ListView listaPartite;
+	protected ListView listaPartite;
 	private String giornataScelta;
+	protected View rootView;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
     	
-    	final View rootView = inflater.inflate(R.layout.calendario, container, false);
+    	 rootView = inflater.inflate(R.layout.calendario, container, false);
     	
     	if(db == null)
     		db=new MyDatabase(rootView.getContext());
@@ -52,17 +53,21 @@ public class Calendario  extends Fragment {
 	    spinner.setOnItemSelectedListener(new MyListenerSpinner());
 	    listaPartite.setOnItemClickListener(new MyListnerListView());
 	    
-	    TextView userlabel = (TextView) rootView.findViewById(R.id.username);
-	    ImageView imageTeam = (ImageView) rootView.findViewById(R.id.imageSquadra);
+	   
+	    aggiungiSpecifiche();
 	    
-	    userlabel.setText(HomeActivity.ACCOUNT.getUsername());
-	    String nomeSquadra = HomeActivity.ACCOUNT.getSquadra();
-	    int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),"drawable", getActivity().getPackageName());
-    	imageTeam.setImageResource(image);
 
 	    return rootView;
     }
 
+	public void aggiungiSpecifiche(){
+		TextView userlabel = (TextView) getView().findViewById(R.id.username);
+		ImageView imageTeam = (ImageView) getView().findViewById(R.id.imageSquadra);
+		userlabel.setText(HomeActivity.ACCOUNT.getUsername());
+	    String nomeSquadra = HomeActivity.ACCOUNT.getSquadra();
+	    int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),"drawable", getActivity().getPackageName());
+    	imageTeam.setImageResource(image);
+	}
 	public class MyListenerSpinner implements OnItemSelectedListener{
 		
 		@Override
