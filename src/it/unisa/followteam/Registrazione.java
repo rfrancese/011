@@ -1,7 +1,5 @@
 package it.unisa.followteam;
 
-
-
 import java.util.concurrent.ExecutionException;
 
 import it.unisa.followteam.R.id;
@@ -21,75 +19,78 @@ import android.widget.Toast;
 
 public class Registrazione extends Fragment {
 
-	 private MyDatabase db;
-	 private final static String ERRORE_PASS_CONFERMA ="Password diverse";
-	 private Spinner lista;
-	 private EditText editUser, editPass, editPassConf;
-	
-	 public Registrazione() {
-	    }
+	private MyDatabase db;
+	private final static String ERRORE_PASS_CONFERMA = "Password diverse";
+	private Spinner lista;
+	private EditText editUser, editPass, editPassConf;
 
-	    @Override
-	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	            Bundle savedInstanceState) {
-	    
-	    	View rootView = inflater.inflate(R.layout.registrazione, container, false);
-	    	
-	    	if(db == null)
-	    		db=new MyDatabase(rootView.getContext());
+	public Registrazione() {
+	}
 
-	    	db.open();
-			
-			lista = (Spinner) rootView.findViewById(R.id.spinner);
-			Cursor c=db.fetchStadio();
-		     
-		    SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-		    		rootView.getContext(), 
-		    		R.layout.list_item_spinner_squadra, 
-		    		c, 
-		    		new String[]{MyDatabase.StadioMetaData.STADIO_NOME_SQUADRA}, 
-		    		new int[] {R.id.textView1},
-		    		1);
-		    
-		    lista.setAdapter(adapter);
-		    db.close();
-		    
-		    editUser = (EditText) rootView.findViewById(R.id.usernameReg);
-		    editPass = (EditText) rootView.findViewById(R.id.passwordReg);
-		    editPassConf = (EditText) rootView.findViewById(R.id.passwordConferma);
-		    
-		    Button registrati = (Button) rootView.findViewById(id.buttonRegistrazione);
-		    registrati.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-						
-					    String user = editUser.getText().toString();
-					    String pass = editPass.getText().toString();
-					    String passConf = editPassConf.getText().toString();
-					    Cursor c = (Cursor) lista.getItemAtPosition(lista.getSelectedItemPosition());
-					    String team = c.getString(1); // punta alla colonna nome_squadra
-					    
-					    SendDataToServer sdts = new SendDataToServer();
-					    String res ="";
-					    
-					    if(pass.equals(passConf)){
-					    	try {
-								res = sdts.execute(user,pass,team,SendDataToServer.TYPE_REG).get();
-							} catch (InterruptedException | ExecutionException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-					    	Toast.makeText(v.getContext(), res, Toast.LENGTH_LONG).show();
-					    	
-					    }else{
-					    	Toast.makeText(v.getContext(), ERRORE_PASS_CONFERMA, Toast.LENGTH_LONG).show();
-					    }
-					
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.registrazione, container,
+				false);
+
+		if (db == null)
+			db = new MyDatabase(rootView.getContext());
+
+		db.open();
+
+		lista = (Spinner) rootView.findViewById(R.id.spinner);
+		Cursor c = db.fetchStadio();
+
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+				rootView.getContext(), R.layout.list_item_spinner_squadra, c,
+				new String[] { MyDatabase.StadioMetaData.STADIO_NOME_SQUADRA },
+				new int[] { R.id.textView1 }, 1);
+
+		lista.setAdapter(adapter);
+		db.close();
+
+		editUser = (EditText) rootView.findViewById(R.id.usernameReg);
+		editPass = (EditText) rootView.findViewById(R.id.passwordReg);
+		editPassConf = (EditText) rootView.findViewById(R.id.passwordConferma);
+
+		Button registrati = (Button) rootView
+				.findViewById(id.buttonRegistrazione);
+		registrati.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				String user = editUser.getText().toString();
+				String pass = editPass.getText().toString();
+				String passConf = editPassConf.getText().toString();
+				Cursor c = (Cursor) lista.getItemAtPosition(lista
+						.getSelectedItemPosition());
+				String team = c.getString(1); // punta alla colonna nome_squadra
+
+				SendDataToServer sdts = new SendDataToServer();
+				String res = "";
+
+				if (pass.equals(passConf)) {
+					try {
+						res = sdts.execute(user, pass, team,
+								SendDataToServer.TYPE_REG).get();
+					} catch (InterruptedException | ExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Toast.makeText(v.getContext(), res, Toast.LENGTH_LONG)
+							.show();
+
+				} else {
+					Toast.makeText(v.getContext(), ERRORE_PASS_CONFERMA,
+							Toast.LENGTH_LONG).show();
 				}
-			});
-		    
-	        return rootView;
-	    }
-	    
+
+			}
+		});
+
+		return rootView;
+	}
+
 }

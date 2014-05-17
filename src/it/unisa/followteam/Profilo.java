@@ -14,43 +14,53 @@ import android.widget.Toast;
 
 public class Profilo extends Fragment {
 
-	 public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-	    	
-	    	final View rootView = inflater.inflate(R.layout.profilo, container, false);
-	    	
-	    	TextView userProfilo = (TextView) rootView.findViewById(R.id.usernameProfilo);
-	    	TextView nomeSquadraProfilo = (TextView) rootView.findViewById(R.id.squadraProfilo);
-	    	ImageView squadraProfiloIcon = (ImageView) rootView.findViewById(R.id.imageSquadraProfilo);
-	    	
-	    	userProfilo.setText(HomeActivity.ACCOUNT.getUsername());
-	    	String nomeSquadra = HomeActivity.ACCOUNT.getSquadra();
-	    	nomeSquadraProfilo.setText(nomeSquadra);
-	    	int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),"drawable", getActivity().getPackageName());
-	    	squadraProfiloIcon.setImageResource(image);
-	    	
-	        Button buttonModifica = (Button) rootView.findViewById(R.id.buttonModificaProfilo);
-	        buttonModifica.setOnClickListener(new View.OnClickListener() {
-	 	
-	 		@Override
-			public void onClick(View v) {
-	 			Fragment fragment =new ModificaProfilo();
-	 			FragmentManager fragmentManager = getFragmentManager();
-	 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
-	 			}
-	 		});
-	        
-	        Button buttonElimina=(Button) rootView.findViewById(R.id.buttonEliminaProfilo);
-	        buttonElimina.setOnClickListener(new View.OnClickListener() {
-				
-	        	//elimina l'istanza dal database
-				public void onClick(View v) {
-				
-					Toast toast =Toast.makeText( getActivity(), "L'account verrà eliminato", Toast.LENGTH_LONG);
-					toast.show();
-				}
-			});
-	        
-	        return rootView;
-	    }
+		final View rootView = inflater.inflate(R.layout.profilo, container,
+				false);
+
+		TextView userProfilo = (TextView) rootView
+				.findViewById(R.id.usernameProfilo);
+		TextView nomeSquadraProfilo = (TextView) rootView
+				.findViewById(R.id.squadraProfilo);
+		ImageView squadraProfiloIcon = (ImageView) rootView
+				.findViewById(R.id.imageSquadraProfilo);
+
+		userProfilo.setText(HomeActivity.ACCOUNT.getUsername());
+		String nomeSquadra = HomeActivity.ACCOUNT.getSquadra();
+		nomeSquadraProfilo.setText(nomeSquadra);
+		int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),
+				"drawable", getActivity().getPackageName());
+		squadraProfiloIcon.setImageResource(image);
+
+		Button buttonModifica = (Button) rootView
+				.findViewById(R.id.buttonModificaProfilo);
+		buttonModifica.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new ModificaProfilo();
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.content_frame, fragment).commit();
+
+			}
+		});
+
+		Button buttonElimina = (Button) rootView
+				.findViewById(R.id.buttonEliminaProfilo);
+		buttonElimina.setOnClickListener(new View.OnClickListener() {
+
+			// elimina l'istanza dal database
+			public void onClick(View v) {
+
+				Toast toast = Toast.makeText(getActivity(),
+						"L'account verrà eliminato", Toast.LENGTH_LONG);
+				toast.show();
+			}
+		});
+
+		return rootView;
+	}
 }

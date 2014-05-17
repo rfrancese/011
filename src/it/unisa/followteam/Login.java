@@ -14,39 +14,40 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class Login extends Fragment {
-	
-	private EditText editUser, editPass;
-	
-    public Login() {
-        // Empty constructor required for fragment subclasses
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-    	
-    	final View rootView = inflater.inflate(R.layout.login, container, false);
-    	 //bottone login apertura intent
-        
-        Button buttonLogin=(Button) rootView.findViewById(R.id.buttonLogin);
-        editUser = (EditText) rootView.findViewById(R.id.username);
-        editPass = (EditText) rootView.findViewById(R.id.password);
-        
-        
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
- 	
-	 		@Override
+	private EditText editUser, editPass;
+
+	public Login() {
+		// Empty constructor required for fragment subclasses
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		final View rootView = inflater
+				.inflate(R.layout.login, container, false);
+		// bottone login apertura intent
+
+		Button buttonLogin = (Button) rootView.findViewById(R.id.buttonLogin);
+		editUser = (EditText) rootView.findViewById(R.id.username);
+		editPass = (EditText) rootView.findViewById(R.id.password);
+
+		buttonLogin.setOnClickListener(new View.OnClickListener() {
+
+			@Override
 			public void onClick(View v) {
-	 			
-	 			SendDataToServer sdts = new SendDataToServer();
-				String res ="";
-				
+
+				SendDataToServer sdts = new SendDataToServer();
+				String res = "";
+
 				String user = editUser.getText().toString();
 				String pass = editPass.getText().toString();
-				
+
 				try {
-					res = sdts.execute(user,pass,null,SendDataToServer.TYPE_LOG).get();
+					res = sdts.execute(user, pass, null,
+							SendDataToServer.TYPE_LOG).get();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -55,21 +56,22 @@ public class Login extends Fragment {
 					e.printStackTrace();
 				}
 
-				if(res.equals("errore")){
-					Toast.makeText(v.getContext(), "Dati non trovati", Toast.LENGTH_LONG).show();
-				}else{
-			        String pkg=getActivity().getPackageName(); 
-					Intent home= new Intent(rootView.getContext(), HomeActivity.class);
+				if (res.equals("errore")) {
+					Toast.makeText(v.getContext(), "Dati non trovati",
+							Toast.LENGTH_LONG).show();
+				} else {
+					String pkg = getActivity().getPackageName();
+					Intent home = new Intent(rootView.getContext(),
+							HomeActivity.class);
 					Account account = new Account(user, pass, res);
-					home.putExtra(pkg+".myAccount", account);
-		 			startActivity(home);
-		 			getActivity().finish();
+					home.putExtra(pkg + ".myAccount", account);
+					startActivity(home);
+					getActivity().finish();
 				}
-				
-	 			
-	 		}
- 		});
-        return rootView;
-    }
-    
+
+			}
+		});
+		return rootView;
+	}
+
 }

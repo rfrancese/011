@@ -1,6 +1,5 @@
 package it.unisa.followteam;
 
-
 import it.unisa.gestioneAutenticazione.Account;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -20,161 +19,158 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 public class HomeActivity extends ActionBarActivity {
-	
+
 	private DrawerLayout mDrawerLayout;
-    private ListView listaOpzioni;
-    private ActionBarDrawerToggle mDrawerToggle;
+	private ListView listaOpzioni;
+	private ActionBarDrawerToggle mDrawerToggle;
 
-    private CharSequence titoloLista;
-    private CharSequence titolo;
-    private String[] opzioni;
-    public static Account ACCOUNT;
-    
-    @Override
+	private CharSequence titoloLista;
+	private CharSequence titolo;
+	private String[] opzioni;
+	public static Account ACCOUNT;
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        String pkg=getPackageName();
-        ACCOUNT = (Account) getIntent().getSerializableExtra(pkg+".myAccount");
-        
-        titolo = titoloLista = getTitle();
-        opzioni = getResources().getStringArray(R.array.optionsMenuLogin);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listaOpzioni = (ListView) findViewById(R.id.left_drawer);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        // inserisce un'ombra dopo l'apertura del menu laterale
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        
-        // inserisco le opzioni nella listview e setto le azioni
-        listaOpzioni.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, opzioni));
-        listaOpzioni.setOnItemClickListener(new DrawerItemClickListener());
+		String pkg = getPackageName();
+		ACCOUNT = (Account) getIntent()
+				.getSerializableExtra(pkg + ".myAccount");
 
-        //seleziono la prima opzione della lista 
-        //come quella di default all'apertura dell'applicazione
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        //setto il bottone per l'apertura del menu laterale
-        getActionBar().setHomeButtonEnabled(true);
+		titolo = titoloLista = getTitle();
+		opzioni = getResources().getStringArray(R.array.optionsMenuLogin);
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		listaOpzioni = (ListView) findViewById(R.id.left_drawer);
 
-        //interazione menu laterale
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                 
-                mDrawerLayout,         
-                R.drawable.ic_drawer,  
-                R.string.drawer_open, 
-                R.string.drawer_close  
-                ) {
-            @Override
-			public void onDrawerClosed(View view) { //chiusura menu
-                getActionBar().setTitle(titolo);
-                invalidateOptionsMenu(); 
-            }
+		// inserisce un'ombra dopo l'apertura del menu laterale
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+				GravityCompat.START);
 
-            @Override
-			public void onDrawerOpened(View drawerView) { //apertura menu
-                getActionBar().setTitle(titoloLista);
-                invalidateOptionsMenu(); 
-            }
-        };
-        
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+		// inserisco le opzioni nella listview e setto le azioni
+		listaOpzioni.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.drawer_list_item, opzioni));
+		listaOpzioni.setOnItemClickListener(new DrawerItemClickListener());
 
-        if (savedInstanceState == null) {
-            selezionaItem(0); //seleziona di default il primo elemento delle opzioni
-        }
-        
-       
-    }
+		// seleziono la prima opzione della lista
+		// come quella di default all'apertura dell'applicazione
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+		// setto il bottone per l'apertura del menu laterale
+		getActionBar().setHomeButtonEnabled(true);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	
-    	//mDrawerToggle gestisce l'apertura e la chiusura del menu
-    	// quando viene selezionata un'opzione
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-    
-        switch(item.getItemId()) {
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
+		// interazione menu laterale
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.drawable.ic_drawer, R.string.drawer_open,
+				R.string.drawer_close) {
+			@Override
+			public void onDrawerClosed(View view) { // chiusura menu
+				getActionBar().setTitle(titolo);
+				invalidateOptionsMenu();
+			}
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selezionaItem(position);
-        }
-    }
+			@Override
+			public void onDrawerOpened(View drawerView) { // apertura menu
+				getActionBar().setTitle(titoloLista);
+				invalidateOptionsMenu();
+			}
+		};
 
-    private void selezionaItem(int posizione) {
-    	
-    	String scelta = getResources().getStringArray(R.array.optionsMenuLogin)[posizione];
-       	Fragment fragment= new Calendario();
-     
-       	switch(scelta){
-      	case "Calendario":
-        	fragment = new Calendario();
-        	break;
-      	case "Profilo":
-        	fragment=new Profilo();
-        	break;
-      	 case "Classifica" : 
-         	fragment=new Classifica();
-         	break;
-        /*case "News" :
-        	fragment=new RegistrazioneFragment();
-        	break;
-       
-        */
-      	case "Logout" :
-      		Intent main= new Intent(this, MainActivity.class);
- 			startActivity(main);
- 			//cancellazione variabile account
- 			finish();
- 			break;
-        default: 
-        	Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
-        	break;
-        }
-       
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        // aggiorna il titolo e l'item selezionato e chiude il menu
-        listaOpzioni.setItemChecked(posizione, true);
-        setTitle(opzioni[posizione]);
-        mDrawerLayout.closeDrawer(listaOpzioni);
-    }
+		if (savedInstanceState == null) {
+			selezionaItem(0); // seleziona di default il primo elemento delle
+								// opzioni
+		}
 
-    @Override
-    public void setTitle(CharSequence title) {
-        titolo = title;
-        getActionBar().setTitle(titolo);
-    }
+	}
 
-   
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		// mDrawerToggle gestisce l'apertura e la chiusura del menu
+		// quando viene selezionata un'opzione
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+
+		switch (item.getItemId()) {
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private class DrawerItemClickListener implements
+			ListView.OnItemClickListener {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			selezionaItem(position);
+		}
+	}
+
+	private void selezionaItem(int posizione) {
+
+		String scelta = getResources().getStringArray(R.array.optionsMenuLogin)[posizione];
+		Fragment fragment = new Calendario();
+
+		switch (scelta) {
+		case "Calendario":
+			fragment = new Calendario();
+			break;
+		case "Profilo":
+			fragment = new Profilo();
+			break;
+		case "Classifica":
+			fragment = new Classifica();
+			break;
+		/*
+		 * case "News" : fragment=new RegistrazioneFragment(); break;
+		 */
+		case "Logout":
+			Intent main = new Intent(this, MainActivity.class);
+			startActivity(main);
+			// cancellazione variabile account
+			finish();
+			break;
+		default:
+			Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
+			break;
+		}
+
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_frame, fragment).commit();
+
+		// aggiorna il titolo e l'item selezionato e chiude il menu
+		listaOpzioni.setItemChecked(posizione, true);
+		setTitle(opzioni[posizione]);
+		mDrawerLayout.closeDrawer(listaOpzioni);
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		titolo = title;
+		getActionBar().setTitle(titolo);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
 }
