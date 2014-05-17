@@ -2,6 +2,7 @@ package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -12,7 +13,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -76,7 +76,7 @@ public class MappaPercorso extends Fragment {
 
 			myLat = gps.getLatitude();
 			myLong = gps.getLongitude();
-			map.addPolyline(new PolylineOptions().geodesic(true)
+			map.addPolyline(new PolylineOptions()
 					.add(new LatLng(myLat, myLong), coordinateStadio).width(5)
 					.color(Color.RED));
 
@@ -86,12 +86,16 @@ public class MappaPercorso extends Fragment {
 
 			map.setMyLocationEnabled(true);
 
-			puntatore = map.addMarker(new MarkerOptions()
-					.position(coordinateStadio));
+			puntatore = map.addMarker(new MarkerOptions().position(
+					coordinateStadio).title(
+					"Clicca sul logo per tracciare il percorso"));
 			puntatore.setIcon(icon);
+			puntatore.showInfoWindow();
 
 			map.setOnMarkerClickListener(new OnMarkerClickListener() {
 
+				// traccia il percorso dalla propria posizione allo stadio
+				// tramite maps
 				@Override
 				public boolean onMarkerClick(Marker marker) {
 					url = "http://maps.google.com/maps?f=d&daddr=" + latitudine
