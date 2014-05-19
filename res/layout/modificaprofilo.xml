@@ -13,7 +13,8 @@
         android:layout_below="@+id/modPassProfilo"
         android:layout_marginTop="38dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword" 
+        style="@style/MyEditText"/>
 
     <Button
         android:id="@+id/buttonConfermaModifica"
@@ -33,7 +34,8 @@
         android:layout_alignRight="@+id/buttonConfermaModifica"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:inputType="textPassword" >
+        android:inputType="textPassword"
+        style="@style/MyEditText" >
 
         <requestFocus />
     </EditText>

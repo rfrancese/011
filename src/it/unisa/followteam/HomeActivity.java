@@ -138,7 +138,7 @@ public class HomeActivity extends ActionBarActivity {
 		case "Logout":
 			Intent main = new Intent(this, MainActivity.class);
 			startActivity(main);
-			// cancellazione variabile account
+			ACCOUNT = new Account();
 			finish();
 			break;
 		default:
