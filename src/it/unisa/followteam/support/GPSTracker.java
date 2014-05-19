@@ -1,4 +1,4 @@
-package it.unisa.followteam;
+package it.unisa.followteam.support;
 
 import android.app.AlertDialog;
 import android.app.Service;

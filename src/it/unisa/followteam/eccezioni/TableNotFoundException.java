@@ -1,4 +1,4 @@
-package it.unisa.eccezioni;
+package it.unisa.followteam.eccezioni;
 
 public class TableNotFoundException extends Exception {
 

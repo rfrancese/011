@@ -3,7 +3,7 @@ package it.unisa.followteam;
 import java.util.concurrent.ExecutionException;
 
 import it.unisa.followteam.database.SendDataToServer;
-import it.unisa.gestioneAutenticazione.Account;
+import it.unisa.followteam.support.Account;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;

@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
+import it.unisa.followteam.support.Alloggio;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;

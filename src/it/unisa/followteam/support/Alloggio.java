@@ -1,4 +1,4 @@
-package it.unisa.followteam;
+package it.unisa.followteam.support;
 
 
 public class Alloggio {

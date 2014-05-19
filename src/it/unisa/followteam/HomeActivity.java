@@ -1,6 +1,6 @@
 package it.unisa.followteam;
 
-import it.unisa.gestioneAutenticazione.Account;
+import it.unisa.followteam.support.Account;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package it.unisa.gestioneAutenticazione;
+package it.unisa.followteam.support;
 
 import java.io.Serializable;
 

@@ -1,6 +1,7 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
+import it.unisa.followteam.support.GPSTracker;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

@@ -1,6 +1,6 @@
 package it.unisa.followteam.database;
 
-import it.unisa.eccezioni.TableNotFoundException;
+import it.unisa.followteam.eccezioni.TableNotFoundException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
