@@ -52,20 +52,28 @@ public class DettagliPartita extends Fragment {
 		ImageView imageSqOspite = (ImageView) rootView
 				.findViewById(R.id.imageSquadraOspite);
 
+		String tmpImg = "";
+		int iconSqOspite = 0;
 		if (sqCasa.contains(" ")) {
 			String[] sq = sqCasa.split(" ");
-			sqCasa = sq[0] + sq[1];
+			tmpImg = sq[0] + sq[1];
+			iconSqCasa = getResources().getIdentifier(tmpImg.toLowerCase(),
+					"drawable", getActivity().getPackageName());
+		} else {
+			iconSqCasa = getResources().getIdentifier(sqCasa.toLowerCase(),
+					"drawable", getActivity().getPackageName());
 		}
 
 		if (sqOspite.contains(" ")) {
 			String[] sq = sqOspite.split(" ");
-			sqOspite = sq[0] + sq[1];
-		}
+			tmpImg = sq[0] + sq[1];
+			iconSqOspite = getResources().getIdentifier(tmpImg.toLowerCase(),
+					"drawable", getActivity().getPackageName());
+		} else {
 
-		iconSqCasa = getResources().getIdentifier(sqCasa.toLowerCase(),
-				"drawable", getActivity().getPackageName());
-		int iconSqOspite = getResources().getIdentifier(sqOspite.toLowerCase(),
-				"drawable", getActivity().getPackageName());
+			iconSqOspite = getResources().getIdentifier(sqOspite.toLowerCase(),
+					"drawable", getActivity().getPackageName());
+		}
 
 		imageSqCasa.setImageResource(iconSqCasa);
 		imageSqOspite.setImageResource(iconSqOspite);

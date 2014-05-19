@@ -21,7 +21,7 @@ public class MyDatabase {
 	DbHelper mDbHelper;
 	Context mContext;
 	private static final String DB_NAME = "followTeam";// nome del db
-	private static final int DB_VERSION = 3; // numero di versione del nostro db
+	private static final int DB_VERSION = 4; // numero di versione del nostro db
 
 	// classe che ci aiuta nella creazione del db
 	private class DbHelper extends SQLiteOpenHelper {
@@ -58,6 +58,7 @@ public class MyDatabase {
 			_db.execSQL(GIORNATA_TABLE_CREATE);
 			_db.execSQL("DROP TABLE " + PartiteMetaData.PARTITA_TITLE_TABLE);
 			_db.execSQL(PARTITA_TABLE_CREATE);
+			onCreate(_db);
 		}
 
 	}
