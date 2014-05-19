@@ -30,6 +30,10 @@ public class Registrazione extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		((MainActivity) getActivity())
+		.setOnBackPressedListener(new BaseBackPressedListener(
+				getActivity()));
 
 		View rootView = inflater.inflate(R.layout.registrazione, container,
 				false);

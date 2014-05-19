@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
 	private CharSequence titoloLista;
 	private CharSequence titolo;
 	private String[] opzioni;
+	protected OnBackPressedListener onBackPressedListener;  
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,20 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
+	public void setOnBackPressedListener(
+			OnBackPressedListener onBackPressedListener) {
+		this.onBackPressedListener = onBackPressedListener;
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (onBackPressedListener != null)
+			onBackPressedListener.doBack();
+		else
+			super.onBackPressed();
+	}
+	 
+	//menu
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
 		@Override

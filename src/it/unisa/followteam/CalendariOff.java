@@ -34,7 +34,7 @@ public class CalendariOff extends Calendario {
 				long id) {
 			Toast.makeText(
 					getActivity(),
-					"Per i dettagli della partita devi effettuare il login in!",
+					"Per i dettagli della partita devi effettuare il login!",
 					Toast.LENGTH_LONG).show();
 
 		}
