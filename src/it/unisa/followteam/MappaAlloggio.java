@@ -15,10 +15,12 @@ import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.support.Alloggio;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -141,6 +143,14 @@ public class MappaAlloggio extends Fragment {
 				map.addMarker(new MarkerOptions().position(
 						new LatLng(a.getLatitudine(), a.getLongitudine()))
 						.icon(iconA));
+			
+			final CameraPosition STADIO = new CameraPosition.Builder()
+					.target(coordinateStadio).zoom(14).bearing(0).tilt(25)
+					.build();
+
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinateStadio,
+					5));
+			map.animateCamera(CameraUpdateFactory.newCameraPosition(STADIO));
 		}
 	}
 	
