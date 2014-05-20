@@ -132,9 +132,9 @@ public class HomeActivity extends ActionBarActivity {
 		case "Classifica":
 			fragment = new Classifica();
 			break;
-		/*
-		 * case "News" : fragment=new RegistrazioneFragment(); break;
-		 */
+		case "News" : 
+			fragment=new News(); 
+			break;
 		case "Logout":
 			Intent main = new Intent(this, MainActivity.class);
 			startActivity(main);

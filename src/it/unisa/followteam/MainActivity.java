@@ -142,6 +142,9 @@ public class MainActivity extends ActionBarActivity {
 		case "Calendario":
 			fragment = new CalendariOff();
 			break;
+		case "News":
+			fragment = new News();
+			break;
 		default:
 			Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
 			break;
