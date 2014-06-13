@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -77,14 +78,15 @@ public class MappaPercorso extends Fragment {
 
 			myLat = gps.getLatitude();
 			myLong = gps.getLongitude();
+			LatLng myPosizione = new LatLng(myLat, myLong);
 			map.addPolyline(new PolylineOptions()
-					.add(new LatLng(myLat, myLong), coordinateStadio).width(5)
+					.add(myPosizione, coordinateStadio).width(5)
 					.color(Color.RED));
 
 			int sqCasa = args.getInt(DettagliPartita.ICON_SQUADRA_CASA);
 			BitmapDescriptor icon = BitmapDescriptorFactory
 					.fromResource(sqCasa);
-
+			
 			map.setMyLocationEnabled(true);
 
 			puntatore = map.addMarker(new MarkerOptions().position(
@@ -109,6 +111,15 @@ public class MappaPercorso extends Fragment {
 					return true;
 				}
 			});
+			
+			final CameraPosition MYPOSIZIONE = new CameraPosition.Builder()
+			.target(myPosizione).zoom(5).bearing(0).tilt(25)
+			.build();
+			
+			
+			map.animateCamera(CameraUpdateFactory.newCameraPosition(MYPOSIZIONE));
+
+			
 		}
 	}
 }

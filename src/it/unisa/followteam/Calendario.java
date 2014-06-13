@@ -29,11 +29,14 @@ public class Calendario extends Fragment {
 			Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.calendario, container, false);
-
+		
+		//inizializzo l'istanza dell'oggetto MyDatabase
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());
 
-		db.open();
+		db.open();//apro la connessione
+		
+		
 		listaPartite = (ListView) rootView.findViewById(R.id.listaPartite);
 		spinner = (Spinner) rootView.findViewById(R.id.spinnerGiornate);
 

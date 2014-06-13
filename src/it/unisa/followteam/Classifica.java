@@ -11,9 +11,6 @@ public class Classifica extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		((MainActivity) getActivity())
-		.setOnBackPressedListener(new BaseBackPressedListener(
-				getActivity()));
 
 		final View rootView = inflater.inflate(R.layout.webview, container,
 				false);

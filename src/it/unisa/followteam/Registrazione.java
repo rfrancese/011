@@ -34,7 +34,7 @@ public class Registrazione extends Fragment {
 		((MainActivity) getActivity())
 		.setOnBackPressedListener(new BaseBackPressedListener(
 				getActivity()));
-
+		
 		View rootView = inflater.inflate(R.layout.registrazione, container,
 				false);
 

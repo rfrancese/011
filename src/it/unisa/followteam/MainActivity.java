@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		titolo = titoloLista = getTitle();
 		opzioni = getResources().getStringArray(R.array.optionsMenu);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -101,6 +101,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
+	//inizio gestione onBackPressListner
 	public void setOnBackPressedListener(
 			OnBackPressedListener onBackPressedListener) {
 		this.onBackPressedListener = onBackPressedListener;
@@ -113,8 +114,9 @@ public class MainActivity extends ActionBarActivity {
 		else
 			super.onBackPressed();
 	}
+	//fine gestione onBackPressListner
 	 
-	//menu
+	
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
 		@Override
@@ -125,7 +127,8 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void selezionaItem(int posizione) {
-
+		
+		//scelta contiene la risorsa selezionata
 		String scelta = getResources().getStringArray(R.array.optionsMenu)[posizione];
 		Fragment fragment = new Login();
 
@@ -149,7 +152,8 @@ public class MainActivity extends ActionBarActivity {
 			Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
 			break;
 		}
-
+		
+		//sostituzione del fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
