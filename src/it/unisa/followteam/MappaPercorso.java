@@ -1,6 +1,7 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
+import it.unisa.followteam.support.Connessione;
 import it.unisa.followteam.support.GPSTracker;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -65,6 +67,19 @@ public class MappaPercorso extends Fragment {
 	public void onResume() {
 		super.onResume();
 		if (map == null) {
+			//controllo connessione 
+			//viene inserito sempre prima di ogni chiamata a SendDataToServer
+			Connessione conn= new Connessione(rootView.getContext());
+			//se la connessione non è presente fa il return
+			//e non effettua l'execute del SendDataToServer
+			if(!conn.controllaConnessione()){
+				AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(rootView.getContext());
+				myAlertDialog.setTitle("Attenzione");
+				myAlertDialog.setMessage("Connessione assente! Riprova");
+				myAlertDialog.setNeutralButton("Ok", null);
+				myAlertDialog.show();
+				return;
+			}
 
 			Bundle args = getArguments();
 			map = fragment.getMap();

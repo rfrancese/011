@@ -5,7 +5,9 @@ import java.util.concurrent.ExecutionException;
 import it.unisa.followteam.R.id;
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.database.SendDataToServer;
+import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -61,6 +63,19 @@ public class Registrazione extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				//controllo connessione 
+				//viene inserito sempre prima di ogni chiamata a SendDataToServer
+				Connessione conn= new Connessione(getView().getContext());
+				//se la connessione non è presente fa il return
+				//e non effettua l'execute del SendDataToServer
+				if(!conn.controllaConnessione()){
+					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext());
+					myAlertDialog.setTitle("Attenzione");
+					myAlertDialog.setMessage("Connessione assente! Riprova");
+					myAlertDialog.setNeutralButton("Ok", null);
+					myAlertDialog.show();
+					return;
+				}
 
 				String user = editUser.getText().toString();
 				String pass = editPass.getText().toString();

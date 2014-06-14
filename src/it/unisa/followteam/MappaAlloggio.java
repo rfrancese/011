@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.support.Alloggio;
+import it.unisa.followteam.support.Connessione;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Camera;
 import android.hardware.GeomagneticField;
@@ -72,6 +74,20 @@ public class MappaAlloggio extends Fragment {
 	public void onResume() {
 		super.onResume();
 		if (map == null) {
+			
+			//controllo connessione 
+			//viene inserito sempre prima di ogni chiamata a SendDataToServer
+			Connessione conn= new Connessione(getView().getContext());
+			//se la connessione non è presente fa il return
+			//e non effettua l'execute del SendDataToServer
+			if(!conn.controllaConnessione()){
+				AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext());
+				myAlertDialog.setTitle("Attenzione");
+				myAlertDialog.setMessage("Connessione assente! Riprova");
+				myAlertDialog.setNeutralButton("Ok", null);
+				myAlertDialog.show();
+				return ;
+			}
 			// prendo il riferimento della mappa
 			map = fragment.getMap();
 			// prendo gli argomenti passati dalla classe DettagliPartita

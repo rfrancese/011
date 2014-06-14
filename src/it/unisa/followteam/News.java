@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import it.unisa.followteam.support.Connessione;
 import it.unisa.followteam.support.RSSItem;
 
 public class News extends Fragment {
@@ -37,33 +39,32 @@ public class News extends Fragment {
 			Bundle savedInstanceState) {
 		
 		final View rootView = inflater.inflate(R.layout.news, container, false);
+		//controllo connessione 
+		//viene inserito sempre prima di ogni chiamata a SendDataToServer
+		Connessione conn= new Connessione(rootView.getContext());
+		//se la connessione non è presente fa il return
+		//e non effettua l'execute del SendDataToServer
+		if(!conn.controllaConnessione()){
+			AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(rootView.getContext());
+			myAlertDialog.setTitle("Attenzione");
+			myAlertDialog.setMessage("Connessione assente! Riprova");
+			myAlertDialog.setNeutralButton("Ok", null);
+			myAlertDialog.show();
+			return rootView;
+		}
 		
 		getActivity().getActionBar().setTitle("News");
 
 		feedUrl = "http://www.gazzetta.it/rss/calcio.xml";
 		
-		//inizializzo il ConnectivityManager
-		cm=(ConnectivityManager) rootView.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		
-		connessioneDisponibile=false;
-		
-		if(cm!=null && cm.getActiveNetworkInfo()!=null){
-	        //controllo disponibilità di rete
-	        connessioneDisponibile= cm.getActiveNetworkInfo().isConnectedOrConnecting();
-	     }
-		
-		if(connessioneDisponibile){
 			rssListView = (ListView) rootView.findViewById(R.id.rssListView);
 	
 			array_adapter = new ArrayAdapter<RSSItem>(rootView.getContext(), R.layout.list_item,
 					RSSItems);
 			rssListView.setAdapter(array_adapter);
 			refreshRSSList();
-		}else{
-			 Toast t=new Toast(rootView.getContext());
-			t.makeText(rootView.getContext(), "Connessione non disponibile", Toast.LENGTH_LONG).show();
-		    
-		}
+		
 		return rootView;
 
 	}
