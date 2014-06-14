@@ -72,7 +72,7 @@ public class Registrazione extends Fragment {
 						.getSelectedItemPosition());
 				String team = c.getString(1); // punta alla colonna nome_squadra
 
-				SendDataToServer sdts = new SendDataToServer();
+				SendDataToServer sdts = new SendDataToServer(getView().getContext());
 				String res = "";
 
 				if (pass.equals(passConf)) {

@@ -87,7 +87,7 @@ public class ModificaProfilo extends Fragment {
 
 			String res = "";
 
-			SendDataToServer sdts = new SendDataToServer();
+			SendDataToServer sdts = new SendDataToServer(getView().getContext());
 
 			try {
 				res = sdts.execute(HomeActivity.ACCOUNT.getUsername(), pass,

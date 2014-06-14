@@ -9,7 +9,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
 import org.json.*;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class SendDataToServer extends AsyncTask<String, Void, String> {
 
@@ -17,6 +20,27 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 	public static final String TYPE_LOG = "Login";
 	public static final String TYPE_UPDATE = "Update";
 	public static final String TYPE_DELETE = "Delete";
+	private Context context;
+    ProgressDialog dialog;
+	
+
+    public SendDataToServer(Context cxt) {
+        context = cxt;
+        dialog = new ProgressDialog(context);
+    }
+
+    @Override	
+    protected void onPreExecute() {
+        dialog.setTitle("Caricamento in corso..");
+        dialog.show();
+        
+    }
+    protected void onPostExecute(String result) {
+    	super.onPostExecute(result);
+        Log.i("result","" +result);
+        if(result!=null)
+            dialog.dismiss();
+     }
 
 	@Override
 	protected String doInBackground(String... params) {

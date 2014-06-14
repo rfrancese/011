@@ -39,7 +39,7 @@ public class Login extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				SendDataToServer sdts = new SendDataToServer();
+				SendDataToServer sdts = new SendDataToServer(getView().getContext());
 				String res = "";
 
 				String user = editUser.getText().toString();
