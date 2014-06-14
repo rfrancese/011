@@ -1,5 +1,7 @@
 package it.unisa.followteam;
 
+import it.unisa.followteam.support.Connessione;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +16,21 @@ public class Classifica extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.webview, container,
 				false);
-		
+		getActivity().getActionBar().setTitle("Classifica");
+		//controllo connessione 
+		//viene inserito sempre prima di ogni chiamata a SendDataToServer
+		Connessione conn= new Connessione(getView().getContext());
+		//se la connessione non è presente fa il return
+		//e non effettua l'execute del SendDataToServer
+		if(!conn.controllaConnessione()){
+			AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext(),R.style.MyDialogBox);
+			myAlertDialog.setTitle("Attenzione");
+			myAlertDialog.setMessage("Connessione assente! Riprova");
+			myAlertDialog.setNeutralButton("Ok", null);
+			myAlertDialog.show();
+			return rootView;
+		}
+
 		getActivity().getActionBar().setTitle("Classifica");
 
 

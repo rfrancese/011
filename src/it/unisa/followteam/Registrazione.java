@@ -69,7 +69,7 @@ public class Registrazione extends Fragment {
 				//se la connessione non è presente fa il return
 				//e non effettua l'execute del SendDataToServer
 				if(!conn.controllaConnessione()){
-					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext());
+					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext(),R.style.MyDialogBox);
 					myAlertDialog.setTitle("Attenzione");
 					myAlertDialog.setMessage("Connessione assente! Riprova");
 					myAlertDialog.setNeutralButton("Ok", null);

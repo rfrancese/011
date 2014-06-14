@@ -73,21 +73,23 @@ public class MappaAlloggio extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		//controllo connessione 
+				//viene inserito sempre prima di ogni chiamata a SendDataToServer
+				Connessione conn= new Connessione(getView().getContext());
+				//se la connessione non è presente fa il return
+				//e non effettua l'execute del SendDataToServer
+				if(!conn.controllaConnessione()){
+					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext(),R.style.MyDialogBox);
+					myAlertDialog.setTitle("Attenzione");
+					
+					myAlertDialog.setMessage("Connessione assente! Riprova");
+					myAlertDialog.setNeutralButton("Ok", null);
+					myAlertDialog.show();
+					return;
+				}
 		if (map == null) {
 			
-			//controllo connessione 
-			//viene inserito sempre prima di ogni chiamata a SendDataToServer
-			Connessione conn= new Connessione(getView().getContext());
-			//se la connessione non è presente fa il return
-			//e non effettua l'execute del SendDataToServer
-			if(!conn.controllaConnessione()){
-				AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext());
-				myAlertDialog.setTitle("Attenzione");
-				myAlertDialog.setMessage("Connessione assente! Riprova");
-				myAlertDialog.setNeutralButton("Ok", null);
-				myAlertDialog.show();
-				return ;
-			}
+			
 			// prendo il riferimento della mappa
 			map = fragment.getMap();
 			// prendo gli argomenti passati dalla classe DettagliPartita
