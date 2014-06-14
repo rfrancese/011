@@ -4,7 +4,10 @@ import java.util.concurrent.ExecutionException;
 
 import it.unisa.followteam.database.SendDataToServer;
 import it.unisa.followteam.support.Account;
+import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,7 +49,21 @@ public class Login extends Fragment {
 
 				String user = editUser.getText().toString();
 				String pass = editPass.getText().toString();
-
+				
+				//controllo connessione 
+				//viene inserito sempre prima di ogni chiamata a SendDataToServer
+				Connessione conn= new Connessione(rootView.getContext());
+				//se la connessione non è presente fa il return
+				//e non effettua l'execute del SendDataToServer
+				if(!conn.controllaConnessione()){
+					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(rootView.getContext());
+					myAlertDialog.setTitle("Attenzione");
+					myAlertDialog.setMessage("Connessione assente! Riprova");
+					myAlertDialog.setNeutralButton("Ok", null);
+					myAlertDialog.show();
+					return;
+				}
+				
 				try {
 					res = sdts.execute(user, pass, null,
 							SendDataToServer.TYPE_LOG).get();
