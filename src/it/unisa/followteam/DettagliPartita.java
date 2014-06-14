@@ -28,6 +28,7 @@ public class DettagliPartita extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.dettaglipartita,
 				container, false);
+		
 		getActivity().getActionBar().setTitle("Dettagli Partita");
 
 		Bundle args = getArguments();
@@ -129,7 +130,7 @@ public class DettagliPartita extends Fragment {
 				Fragment fragment = new MappaPercorso();
 				fragment.setArguments(argsMaps);
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 			}
 		});
 
@@ -144,7 +145,7 @@ public class DettagliPartita extends Fragment {
 				fragment.setArguments(argsMaps);
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 			}
 		});
 		return rootView;

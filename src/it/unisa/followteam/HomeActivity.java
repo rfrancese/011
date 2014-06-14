@@ -34,7 +34,7 @@ public class HomeActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		String pkg = getPackageName();
 		ACCOUNT = (Account) getIntent()
 				.getSerializableExtra(pkg + ".myAccount");
@@ -80,8 +80,11 @@ public class HomeActivity extends ActionBarActivity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			selezionaItem(0); // seleziona di default il primo elemento delle
-								// opzioni
+			// seleziona il calendario come prima entry
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+				.add(R.id.content_frame, new Calendario()).commit();
+			setTitle(opzioni[0]);
 		}
 
 	}
@@ -148,7 +151,7 @@ public class HomeActivity extends ActionBarActivity {
 
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+				.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 		// aggiorna il titolo e l'item selezionato e chiude il menu
 		listaOpzioni.setItemChecked(posizione, true);
@@ -172,5 +175,11 @@ public class HomeActivity extends ActionBarActivity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(getSupportFragmentManager().getBackStackEntryCount() != 0)
+			super.onBackPressed();
 	}
 }

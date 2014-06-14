@@ -19,6 +19,9 @@ public class Profilo extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.profilo, container,
 				false);
+		
+		getActivity().getActionBar().setTitle("Profilo");
+
 
 		TextView userProfilo = (TextView) rootView
 				.findViewById(R.id.usernameProfilo);
@@ -43,7 +46,7 @@ public class Profilo extends Fragment {
 				Fragment fragment = new ModificaProfilo();
 				FragmentManager fragmentManager = getFragmentManager();
 				fragmentManager.beginTransaction()
-						.replace(R.id.content_frame, fragment).commit();
+						.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 			}
 		});

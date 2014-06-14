@@ -15,9 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity{
 	private DrawerLayout mDrawerLayout;
 	private ListView listaOpzioni;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -25,12 +24,12 @@ public class MainActivity extends ActionBarActivity {
 	private CharSequence titoloLista;
 	private CharSequence titolo;
 	private String[] opzioni;
-	protected OnBackPressedListener onBackPressedListener;  
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		
 		titolo = titoloLista = getTitle();
 		opzioni = getResources().getStringArray(R.array.optionsMenu);
@@ -73,8 +72,11 @@ public class MainActivity extends ActionBarActivity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			selezionaItem(0); // seleziona di default il primo elemento delle
-								// opzioni
+		 // seleziona il login come prima entry
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+					.add(R.id.content_frame, new Login()).commit();
+			setTitle(opzioni[0]);
 		}
 
 	}
@@ -100,22 +102,13 @@ public class MainActivity extends ActionBarActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
-	//inizio gestione onBackPressListner
-	public void setOnBackPressedListener(
-			OnBackPressedListener onBackPressedListener) {
-		this.onBackPressedListener = onBackPressedListener;
-	}
-
+	
+	
 	@Override
 	public void onBackPressed() {
-		if (onBackPressedListener != null)
-			onBackPressedListener.doBack();
-		else
+		if(getSupportFragmentManager().getBackStackEntryCount() != 0)
 			super.onBackPressed();
 	}
-	//fine gestione onBackPressListner
-	 
 	
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
@@ -149,14 +142,13 @@ public class MainActivity extends ActionBarActivity {
 			fragment = new News();
 			break;
 		default:
-			Toast.makeText(this, scelta, Toast.LENGTH_LONG).show();
 			break;
 		}
 		
 		//sostituzione del fragment
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+				.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 		// aggiorna il titolo e l'item selezionato e chiude il menu
 		listaOpzioni.setItemChecked(posizione, true);

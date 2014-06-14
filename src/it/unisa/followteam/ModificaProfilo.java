@@ -28,6 +28,10 @@ public class ModificaProfilo extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.modificaprofilo,
 				container, false);
+		
+		getActivity().getActionBar().setTitle("Modifica Profilo");
+
+		
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());
 

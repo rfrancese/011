@@ -30,6 +30,8 @@ public class Calendario extends Fragment {
 
 		rootView = inflater.inflate(R.layout.calendario, container, false);
 		
+		getActivity().getActionBar().setTitle("Calendario");
+		
 		//inizializzo l'istanza dell'oggetto MyDatabase
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());
@@ -121,7 +123,7 @@ public class Calendario extends Fragment {
 			FragmentManager fragmentManager = getFragmentManager();
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+					.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 		}
 	}

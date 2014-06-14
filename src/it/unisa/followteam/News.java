@@ -37,6 +37,9 @@ public class News extends Fragment {
 			Bundle savedInstanceState) {
 		
 		final View rootView = inflater.inflate(R.layout.news, container, false);
+		
+		getActivity().getActionBar().setTitle("News");
+
 		feedUrl = "http://www.gazzetta.it/rss/calcio.xml";
 		
 		//inizializzo il ConnectivityManager

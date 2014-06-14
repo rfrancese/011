@@ -30,6 +30,8 @@ public class Login extends Fragment {
 				.inflate(R.layout.login, container, false);
 		// bottone login apertura intent
 
+		getActivity().getActionBar().setTitle("Login");
+		
 		Button buttonLogin = (Button) rootView.findViewById(R.id.buttonLogin);
 		editUser = (EditText) rootView.findViewById(R.id.username);
 		editPass = (EditText) rootView.findViewById(R.id.password);
@@ -73,5 +75,7 @@ public class Login extends Fragment {
 		});
 		return rootView;
 	}
+	
+	
 
 }

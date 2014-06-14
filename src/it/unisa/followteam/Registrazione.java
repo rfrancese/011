@@ -31,12 +31,9 @@ public class Registrazione extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		((MainActivity) getActivity())
-		.setOnBackPressedListener(new BaseBackPressedListener(
-				getActivity()));
-		
 		View rootView = inflater.inflate(R.layout.registrazione, container,
 				false);
+		getActivity().getActionBar().setTitle("Registrati");
 
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());

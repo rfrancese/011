@@ -14,6 +14,9 @@ public class Classifica extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.webview, container,
 				false);
+		
+		getActivity().getActionBar().setTitle("Classifica");
+
 
 		WebView web = (WebView) rootView.findViewById(R.id.web);
 		web.loadUrl("http://www.corrieredellosport.it/live/SerieA/classifica.shtml");
