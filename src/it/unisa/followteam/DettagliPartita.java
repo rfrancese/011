@@ -1,6 +1,7 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
+import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DettagliPartita extends Fragment {
 
@@ -126,6 +128,15 @@ public class DettagliPartita extends Fragment {
 		buttonPercorso.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				//controllo connessione 
+				//viene inserito sempre prima di ogni chiamata a SendDataToServer
+				Connessione conn= new Connessione(rootView.getContext());
+				//se la connessione non è presente fa il return
+				//e non effettua l'execute del SendDataToServer
+				if(!conn.controllaConnessione()){
+					Toast.makeText(getView().getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
+					return;
+				}
 				FragmentManager fragmentManager = getFragmentManager();
 				Fragment fragment = new MappaPercorso();
 				fragment.setArguments(argsMaps);
@@ -140,6 +151,15 @@ public class DettagliPartita extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				//controllo connessione 
+				//viene inserito sempre prima di ogni chiamata a SendDataToServer
+				Connessione conn= new Connessione(rootView.getContext());
+				//se la connessione non è presente fa il return
+				//e non effettua l'execute del SendDataToServer
+				if(!conn.controllaConnessione()){
+					Toast.makeText(getView().getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
+					return;
+				}
 
 				Fragment fragment = new MappaAlloggio();
 				fragment.setArguments(argsMaps);

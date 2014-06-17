@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MappaPercorso extends Fragment {
 
@@ -66,19 +67,7 @@ public class MappaPercorso extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//controllo connessione 
-		//viene inserito sempre prima di ogni chiamata a SendDataToServer
-		Connessione conn= new Connessione(rootView.getContext());
-		//se la connessione non è presente fa il return
-		//e non effettua l'execute del SendDataToServer
-		if(!conn.controllaConnessione()){
-			AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(rootView.getContext(),R.style.MyDialogBox);
-			myAlertDialog.setTitle("Attenzione");
-			myAlertDialog.setMessage("Connessione assente! Riprova");
-			myAlertDialog.setNeutralButton("Ok", null);
-			myAlertDialog.show();
-			return;
-		}
+		
 		if (map == null) {
 			
 			

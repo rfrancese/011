@@ -40,6 +40,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MappaAlloggio extends Fragment {
 
@@ -73,20 +74,7 @@ public class MappaAlloggio extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//controllo connessione 
-				//viene inserito sempre prima di ogni chiamata a SendDataToServer
-				Connessione conn= new Connessione(getView().getContext());
-				//se la connessione non è presente fa il return
-				//e non effettua l'execute del SendDataToServer
-				if(!conn.controllaConnessione()){
-					AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext(),R.style.MyDialogBox);
-					myAlertDialog.setTitle("Attenzione");
-					
-					myAlertDialog.setMessage("Connessione assente! Riprova");
-					myAlertDialog.setNeutralButton("Ok", null);
-					myAlertDialog.show();
-					return;
-				}
+
 		if (map == null) {
 			
 			

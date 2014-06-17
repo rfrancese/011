@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 public class Classifica extends Fragment {
 
@@ -16,21 +17,15 @@ public class Classifica extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.webview, container,
 				false);
-		getActivity().getActionBar().setTitle("Classifica");
 		//controllo connessione 
 		//viene inserito sempre prima di ogni chiamata a SendDataToServer
-		Connessione conn= new Connessione(getView().getContext());
+		Connessione conn= new Connessione(rootView.getContext());
 		//se la connessione non è presente fa il return
 		//e non effettua l'execute del SendDataToServer
 		if(!conn.controllaConnessione()){
-			AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(getView().getContext(),R.style.MyDialogBox);
-			myAlertDialog.setTitle("Attenzione");
-			myAlertDialog.setMessage("Connessione assente! Riprova");
-			myAlertDialog.setNeutralButton("Ok", null);
-			myAlertDialog.show();
+			Toast.makeText(rootView.getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
 			return rootView;
 		}
-
 		getActivity().getActionBar().setTitle("Classifica");
 
 

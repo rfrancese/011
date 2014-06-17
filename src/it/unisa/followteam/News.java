@@ -39,18 +39,16 @@ public class News extends Fragment {
 			Bundle savedInstanceState) {
 		
 		final View rootView = inflater.inflate(R.layout.news, container, false);
+		
 		//controllo connessione 
 		//viene inserito sempre prima di ogni chiamata a SendDataToServer
 		Connessione conn= new Connessione(rootView.getContext());
 		//se la connessione non è presente fa il return
 		//e non effettua l'execute del SendDataToServer
 		if(!conn.controllaConnessione()){
-			AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(rootView.getContext(),R.style.MyDialogBox);
-			myAlertDialog.setTitle("Attenzione");
-			myAlertDialog.setMessage("Connessione assente! Riprova");
-			myAlertDialog.setNeutralButton("Ok", null);
-			myAlertDialog.show();
+			Toast.makeText(rootView.getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
 			return rootView;
+			
 		}
 		
 		getActivity().getActionBar().setTitle("News");
