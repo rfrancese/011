@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutionException;
 
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.database.SendDataToServer;
+import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -67,15 +68,25 @@ public class ModificaProfilo extends Fragment {
 
 		Button modProfilo = (Button) rootView
 				.findViewById(R.id.buttonConfermaModifica);
-		modProfilo.setOnClickListener(new MyButtonListernerModifica());
+		modProfilo.setOnClickListener(new MyButtonListenerModifica());
 
 		return rootView;
 	}
 
-	public class MyButtonListernerModifica implements OnClickListener {
+	public class MyButtonListenerModifica implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
+			//controllo connessione 
+			//viene inserito sempre prima di ogni chiamata a SendDataToServer
+			Connessione conn= new Connessione(getView().getContext());
+			//se la connessione non è presente fa il return
+			//e non effettua l'execute del SendDataToServer
+			if(!conn.controllaConnessione()){
+				Toast.makeText(getView().getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
+				return;
+				
+			}
 			String pass = editPass.getText().toString();
 			String confPass = editPassConf.getText().toString();
 

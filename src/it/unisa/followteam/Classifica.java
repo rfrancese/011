@@ -23,8 +23,8 @@ public class Classifica extends Fragment {
 		//se la connessione non è presente fa il return
 		//e non effettua l'execute del SendDataToServer
 		if(!conn.controllaConnessione()){
-			Toast.makeText(rootView.getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
-			return rootView;
+			View viewConnessione = inflater.inflate(R.layout.controllo_connessione, container, false);
+			return viewConnessione;
 		}
 		getActivity().getActionBar().setTitle("Classifica");
 
