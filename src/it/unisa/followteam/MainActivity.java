@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
+	
 		titolo = titoloLista = getTitle();
 		opzioni = getResources().getStringArray(R.array.optionsMenu);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
