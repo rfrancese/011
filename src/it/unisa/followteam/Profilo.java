@@ -1,8 +1,25 @@
 package it.unisa.followteam;
 
+import it.unisa.followteam.database.HTTPPoster;
+import it.unisa.followteam.support.Account;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,16 +71,95 @@ public class Profilo extends Fragment {
 		Button buttonElimina = (Button) rootView
 				.findViewById(R.id.buttonEliminaProfilo);
 		buttonElimina.setOnClickListener(new View.OnClickListener() {
-
 			// elimina l'istanza dal database
 			public void onClick(View v) {
+				
+				confermaEliminaAccount();
+				
+			}
 
-				Toast toast = Toast.makeText(getActivity(),
-						"L'account verrà eliminato", Toast.LENGTH_LONG);
-				toast.show();
+			private void confermaEliminaAccount() {
+				AlertDialog.Builder alertDialog = new AlertDialog.Builder(rootView.getContext());
+				// setto il titolo della dialog
+				alertDialog.setTitle("Elimina account");
+				//setto messaggio dialog
+				alertDialog.setMessage("Sei sicuro di voler eliminare l'account ?");
+				// button si
+				alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int which) {
+						String user=HomeActivity.ACCOUNT.getUsername();
+						
+						SendDataToServer sdts=new SendDataToServer();
+						sdts.execute(user);
+					}
+				});
+				// button no
+				alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+						}
+				});
+				alertDialog.show();	
 			}
 		});
-
-		return rootView;
+	    return rootView;
 	}
+	private class SendDataToServer extends AsyncTask<String, Void, String> {
+
+		private ProgressDialog dialog;
+
+		@Override
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(getView().getContext());
+			dialog.setCancelable(true);
+			dialog.setTitle("Eliminazione account in corso...");
+			dialog.show();
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+
+			dialog.dismiss();
+
+			if (result.length() == 0){
+				Toast.makeText(getActivity(), "Account eliminato!",
+						Toast.LENGTH_LONG).show();
+				Intent main = new Intent(getView().getContext(),
+						MainActivity.class);
+				startActivity(main);
+				getActivity().finish();
+			}
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			
+			String user = params[0];
+			
+			JSONObject j = new JSONObject();
+
+			try {
+				j.put("user", user);
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			String url = "http://followteam.altervista.org/delete.php";
+			String temp = "";
+			try {
+				Map<String, String> kvPairs = new HashMap<String, String>();
+				kvPairs.put("pippo", j.toString());
+				HttpResponse re = HTTPPoster.doPost(url, kvPairs);
+				temp = EntityUtils.toString(re.getEntity());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return temp;
+		}
+
+	}
+
 }
