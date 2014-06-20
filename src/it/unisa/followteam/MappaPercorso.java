@@ -69,8 +69,6 @@ public class MappaPercorso extends Fragment {
 		super.onResume();
 		
 		if (map == null) {
-			
-			
 
 			Bundle args = getArguments();
 			map = fragment.getMap();

@@ -1,12 +1,26 @@
 package it.unisa.followteam;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.database.SendDataToServer;
+import it.unisa.followteam.support.Account;
 import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
@@ -29,10 +43,9 @@ public class ModificaProfilo extends Fragment {
 
 		final View rootView = inflater.inflate(R.layout.modificaprofilo,
 				container, false);
-		
+
 		getActivity().getActionBar().setTitle("Modifica Profilo");
 
-		
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());
 
@@ -77,15 +90,17 @@ public class ModificaProfilo extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			//controllo connessione 
-			//viene inserito sempre prima di ogni chiamata a SendDataToServer
-			Connessione conn= new Connessione(getView().getContext());
-			//se la connessione non è presente fa il return
-			//e non effettua l'execute del SendDataToServer
-			if(!conn.controllaConnessione()){
-				Toast.makeText(getView().getContext(), "Controlla la tua connessione a internet e riprova", Toast.LENGTH_LONG).show();
+			// controllo connessione
+			// viene inserito sempre prima di ogni chiamata a SendDataToServer
+			Connessione conn = new Connessione(getView().getContext());
+			// se la connessione non è presente fa il return
+			// e non effettua l'execute del SendDataToServer
+			if (!conn.controllaConnessione()) {
+				Toast.makeText(getView().getContext(),
+						"Controlla la tua connessione a internet e riprova",
+						Toast.LENGTH_LONG).show();
 				return;
-				
+
 			}
 			String pass = editPass.getText().toString();
 			String confPass = editPassConf.getText().toString();
@@ -100,28 +115,69 @@ public class ModificaProfilo extends Fragment {
 					.getSelectedItemPosition());
 			String team = c.getString(1);
 
-			String res = "";
+			SendDataToServer sdts = new SendDataToServer();
 
-			SendDataToServer sdts = new SendDataToServer(getView().getContext());
-
-			try {
-				res = sdts.execute(HomeActivity.ACCOUNT.getUsername(), pass,
-						team, SendDataToServer.TYPE_UPDATE).get();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if (res.length() == 0)
-				Toast.makeText(getActivity(), "Profilo aggiornato!",
-						Toast.LENGTH_LONG).show();
-
-			// da gestire internet assente
+			sdts.execute(HomeActivity.ACCOUNT.getUsername(), pass, team);
 
 		}
 
 	}
+
+	private class SendDataToServer extends AsyncTask<String, Void, String> {
+
+		private ProgressDialog dialog;
+
+		@Override
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(getView().getContext());
+			dialog.setCancelable(true);
+			dialog.setTitle("Caricamento in corso..");
+			dialog.show();
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+
+			dialog.dismiss();
+
+			if (result.length() == 0)
+				Toast.makeText(getActivity(), "Profilo aggiornato!",
+						Toast.LENGTH_LONG).show();
+
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			String user = params[0];
+			String pass = params[1];
+			String team = params[2];
+
+			JSONObject j = new JSONObject();
+
+			try {
+				j.put("user", user);
+				j.put("password", pass);
+				j.put("team", team);
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			String url = "http://followteam.altervista.org/update.php";
+			String temp = "";
+			try {
+				Map<String, String> kvPairs = new HashMap<String, String>();
+				kvPairs.put("pippo", j.toString());
+				HttpResponse re = HTTPPoster.doPost(url, kvPairs);
+				temp = EntityUtils.toString(re.getEntity());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return temp;
+		}
+
+	}
+
 }

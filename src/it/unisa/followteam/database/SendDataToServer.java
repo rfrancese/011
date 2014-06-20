@@ -24,7 +24,7 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 	public static final String TYPE_UPDATE = "Update";
 	public static final String TYPE_DELETE = "Delete";
 	private Context context;
-	ProgressDialog dialog;
+	private ProgressDialog dialog;
 
 	public SendDataToServer(Context cxt) {
 		context = cxt;
@@ -32,16 +32,18 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected void onPreExecute() {
+		Log.v("OnPreExecute","");
 		dialog = new ProgressDialog(context);
 		dialog.setCancelable(true);
 		dialog.setTitle("Caricamento in corso..");
-		dialog.show();
+		dialog.show();	
 
 	}
 
+	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-		Log.i("SendDataToServer", "" + result);
+		Log.v("SendDataToServer", "" + result);
 		if (result != null)
 			dialog.dismiss();
 	}
@@ -50,7 +52,7 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... params) {
 
 		String temp = "";
-
+		
 		String user = params[0];
 		String pass = params[1];
 		String team = params[2];
@@ -81,7 +83,7 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 		case TYPE_DELETE:
 			url = "http://followteam.altervista.org/delete.php";
 			break;
-		default:
+		default: 
 			throw new IllegalArgumentException("Caso " + caso + " non corretto");
 		}
 		
@@ -98,5 +100,6 @@ public class SendDataToServer extends AsyncTask<String, Void, String> {
 
 		return temp;
 	}
-
+	
+	
 }
