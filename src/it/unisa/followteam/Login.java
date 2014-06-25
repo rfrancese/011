@@ -17,6 +17,7 @@ import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,6 +79,7 @@ public class Login extends Fragment {
 		});
 		return rootView;
 	}
+ 
 
 	private class SendDataToServer extends AsyncTask<String, Void, String> {
 

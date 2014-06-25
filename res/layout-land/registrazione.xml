@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp" >
+
+        <EditText
+            android:id="@+id/usernameReg"
+            style="@style/MyEditText"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/usernameLabel"
+            android:inputType="textPersonName" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/passwordReg"
+            style="@style/MyEditText"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/passwordLabel"
+            android:layout_marginRight="20dp"
+            android:inputType="textPassword" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/passwordConferma"
+            style="@style/MyEditText"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/passwordLabelConferma"
+            android:inputType="textPassword" />
+
+    </TableRow>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true"
+        android:layout_marginBottom="5dp"/>
+
+    <TableRow
+        
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" >
+
+        <Button
+            android:id="@+id/buttonRegistrazione"
+            style="@style/button"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:text="@string/buttonRegistrati"
+            android:gravity="center" />
+
+    </TableRow>
+
+</TableLayout>

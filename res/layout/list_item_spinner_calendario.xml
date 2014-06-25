@@ -10,12 +10,13 @@
         android:layout_height="wrap_content"
         android:text="@string/giornataLabel"
         style="@style/LayoutSpinner"
-         />
+        android:gravity="center"/>
     <TextView 
         android:id="@+id/idGiornata"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         style="@style/LayoutSpinner"
+        android:gravity="center"
          />
     
 </LinearLayout>

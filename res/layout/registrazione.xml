@@ -58,6 +58,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
         android:text="@string/buttonRegistrati"
+        android:layout_height="90dp"
+        android:layout_width="110dp"
         style="@style/button" />
 
 </RelativeLayout>

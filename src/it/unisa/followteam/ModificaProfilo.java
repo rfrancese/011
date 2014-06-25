@@ -17,7 +17,9 @@ import it.unisa.followteam.database.SendDataToServer;
 import it.unisa.followteam.support.Account;
 import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -90,8 +92,6 @@ public class ModificaProfilo extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			// controllo connessione
-			// viene inserito sempre prima di ogni chiamata a SendDataToServer
 			Connessione conn = new Connessione(getView().getContext());
 			// se la connessione non è presente fa il return
 			// e non effettua l'execute del SendDataToServer
@@ -100,27 +100,47 @@ public class ModificaProfilo extends Fragment {
 						"Controlla la tua connessione a internet e riprova",
 						Toast.LENGTH_LONG).show();
 				return;
-
 			}
-			String pass = editPass.getText().toString();
-			String confPass = editPassConf.getText().toString();
-
-			if (!(pass.equals(confPass))) {
-				Toast.makeText(getActivity(), "Le password non coincidono",
-						Toast.LENGTH_LONG).show();
-				return;
-			}
-
-			Cursor c = (Cursor) lista.getItemAtPosition(lista
-					.getSelectedItemPosition());
-			String team = c.getString(1);
-
-			SendDataToServer sdts = new SendDataToServer();
-
-			sdts.execute(HomeActivity.ACCOUNT.getUsername(), pass, team);
-
+			
+			confermaModifiche();
 		}
 
+		private void confermaModifiche() {
+			AlertDialog.Builder alertDialog = new AlertDialog.Builder(getView().getContext());
+			// setto il titolo della dialog
+			alertDialog.setTitle("Modifica account");
+			//setto messaggio dialog
+			alertDialog.setMessage("Sei sicuro di voler modificare l'account ?");
+			// button si
+			alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog,int which) {
+					String pass = editPass.getText().toString();
+					String confPass = editPassConf.getText().toString();
+
+					if (!(pass.equals(confPass))) {
+						Toast.makeText(getActivity(), "Le password non coincidono",
+								Toast.LENGTH_LONG).show();
+						return;
+					}
+
+					Cursor c = (Cursor) lista.getItemAtPosition(lista
+							.getSelectedItemPosition());
+					String team = c.getString(1);
+
+					SendDataToServer sdts = new SendDataToServer();
+
+					sdts.execute(HomeActivity.ACCOUNT.getUsername(), pass, team);
+
+				}
+			});
+			// button no
+			alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+					}
+			});
+			alertDialog.show();	
+		}
 	}
 
 	private class SendDataToServer extends AsyncTask<String, Void, String> {
@@ -141,7 +161,7 @@ public class ModificaProfilo extends Fragment {
 			dialog.dismiss();
 
 			if (result.length() == 0)
-				Toast.makeText(getActivity(), "Profilo aggiornato!",
+				Toast.makeText(getActivity(), "Profilo aggiornato! Rieffettua il login per visualizzare le modifiche",
 						Toast.LENGTH_LONG).show();
 
 		}

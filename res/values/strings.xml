@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">followTeam</string>
+    <string name="app_name">FollowTeam</string>
      <string-array name="optionsMenu">
         <item>Login</item>
         <item>Registrati</item>
@@ -29,10 +29,16 @@
 	<string name="buttonConfermaModifica">Conferma modifiche</string>
 	<string name="giornataLabel">Giornata </string>
 	<string name="separatore"> - </string>
-	<string name="buttonPercorsoLabel">Percorso</string>
-	<string name="buttonAlloggioLabel">Alloggio</string>
+	<string name="buttonPercorsoLabel">Ricerca percorso</string>
+	<string name="buttonAlloggioLabel">Ricerca alloggio</string>
 	<string name="calendarioOfflineLabel">Registrati per le funzionalità aggiuntive!</string>
 	<string name="controlloConnessione">Controlla la tua connessione a internet e riprova !</string>
+	<string name="labelSquadra">Squadra : </string>
+	<string name="labelLogo">Logo : </string>
+	<string name="labelUsernameProfilo">Username :  </string>
+	
+	
+	
 	
 	
     

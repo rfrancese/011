@@ -4,31 +4,36 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <EditText
         android:id="@+id/username"
         style="@style/MyEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginBottom="45dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_vertical"
         android:hint="@string/usernameLabel"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/password"
         style="@style/MyEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:ems="10"
+        android:layout_marginBottom="45dp"
         android:hint="@string/passwordLabel"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonLogin"
         style="@style/button"
-        android:layout_marginTop="20dp"
+        android:layout_width="129dp"
         android:text="@string/buttonLoginLabel" />
 
 </LinearLayout>

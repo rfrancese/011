@@ -1,0 +1,97 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="*"
+    android:layout_marginLeft="20dp">
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="10dp"
+       >
+
+       <TextView
+           android:id="@+id/textViewUsernameProfilo"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="30dp"
+           android:text="@string/labelUsernameProfilo"
+           android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/usernameProfilo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+             />
+        
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="7dp">
+        <TextView
+            android:id="@+id/textViewNomeSquadra"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelSquadra"
+            android:layout_gravity="center" />
+
+         <TextView
+             android:id="@+id/squadraProfilo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/usernameLabel"
+             android:layout_gravity="center" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="7dp">
+         <TextView
+            android:id="@+id/textViewLogo"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labelLogo"
+            android:layout_gravity="center" />
+
+         <ImageView
+             android:id="@+id/imageSquadraProfilo"
+             android:layout_width="70dp"
+             android:layout_height="100dp"
+             android:src="@drawable/ic_launcher"
+             />
+        
+    </TableRow>
+    <TableRow
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent">
+       <Button
+            android:id="@+id/buttonModificaProfilo"
+            style="@style/button"
+            android:layout_width="35dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:minHeight="50dp"
+            android:text="@string/buttonModifica" />
+
+        <Button
+            android:id="@+id/buttonEliminaProfilo"
+            style="@style/button"
+            android:layout_width="35dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/buttonElimina" />
+    </TableRow>
+</TableLayout>

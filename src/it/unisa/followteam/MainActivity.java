@@ -3,6 +3,7 @@ package it.unisa.followteam;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -104,6 +105,7 @@ public class MainActivity extends ActionBarActivity{
 	}
 	
 	
+	
 	@Override
 	public void onBackPressed() {
 		if(getSupportFragmentManager().getBackStackEntryCount() != 0)
@@ -172,6 +174,6 @@ public class MainActivity extends ActionBarActivity{
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
+		
 	}
-
 }

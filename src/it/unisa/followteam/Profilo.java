@@ -19,13 +19,16 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +56,8 @@ public class Profilo extends Fragment {
 		int image = getResources().getIdentifier(nomeSquadra.toLowerCase(),
 				"drawable", getActivity().getPackageName());
 		squadraProfiloIcon.setImageResource(image);
-
+		
+		
 		Button buttonModifica = (Button) rootView
 				.findViewById(R.id.buttonModificaProfilo);
 		buttonModifica.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +107,9 @@ public class Profilo extends Fragment {
 			}
 		});
 	    return rootView;
+	    
 	}
+
 	private class SendDataToServer extends AsyncTask<String, Void, String> {
 
 		private ProgressDialog dialog;
