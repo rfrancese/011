@@ -2,6 +2,7 @@ package it.unisa.followteam;
 
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.support.Account;
+import it.unisa.followteam.support.Connessione;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -77,6 +78,16 @@ public class Profilo extends Fragment {
 		buttonElimina.setOnClickListener(new View.OnClickListener() {
 			// elimina l'istanza dal database
 			public void onClick(View v) {
+				
+				Connessione conn = new Connessione(getView().getContext());
+				// se la connessione non è presente fa il return
+				// e non effettua l'execute del SendDataToServer
+				if (!conn.controllaConnessione()) {
+					Toast.makeText(getView().getContext(),
+							"Controlla la tua connessione a internet e riprova",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
 				
 				confermaEliminaAccount();
 				

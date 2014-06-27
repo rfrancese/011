@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
-import it.unisa.followteam.database.SendDataToServer;
 import it.unisa.followteam.support.Account;
 import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
