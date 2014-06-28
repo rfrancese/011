@@ -30,7 +30,7 @@ public class Calendario extends Fragment {
 
 		rootView = inflater.inflate(R.layout.calendario, container, false);
 		
-		getActivity().getActionBar().setTitle("Calendario");
+		getActivity().setTitle("Calendario");
 		
 		//inizializzo l'istanza dell'oggetto MyDatabase
 		if (db == null)

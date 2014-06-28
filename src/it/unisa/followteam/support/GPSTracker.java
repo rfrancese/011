@@ -16,21 +16,14 @@ import android.util.Log;
 public class GPSTracker extends Service implements LocationListener {
 
 	private final Context mContext;
-
 	boolean isGPSEnabled = false;
-
 	boolean isNetworkEnabled = false;
-
 	boolean canGetLocation = false;
-
 	Location location;
 	double latitudine;
 	double longitudinee;
-
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-
 	protected LocationManager locationManager;
 
 	public GPSTracker(Context context) {
@@ -50,10 +43,10 @@ public class GPSTracker extends Service implements LocationListener {
 					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 			if (!isGPSEnabled && !isNetworkEnabled) {
-				// no network provider is enabled
+				// nessuna connessione e nessun gps
 			} else {
 				this.canGetLocation = true;
-				// First get location from Network Provider
+				//Prendo prima la connessione dalla rete
 				if (isNetworkEnabled) {
 					locationManager.requestLocationUpdates(
 							LocationManager.NETWORK_PROVIDER,
@@ -139,15 +132,15 @@ public class GPSTracker extends Service implements LocationListener {
 	/**
 	 * mostra alert dialog per le opzioni
 	 * */
-	public void showSettingsAlert() {
+	public void showAlterOpzioniGPS() {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-		alertDialog.setTitle("GPS is settings");
+		alertDialog.setTitle("Opzioni GPS");
 
 		alertDialog
-				.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+				.setMessage("Il Gps è disabilitato. Vuoi attivarlo?");
 
-		alertDialog.setPositiveButton("Settings",
+		alertDialog.setPositiveButton("Si",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(
@@ -156,7 +149,7 @@ public class GPSTracker extends Service implements LocationListener {
 					}
 				});
 
-		alertDialog.setNegativeButton("Cancel",
+		alertDialog.setNegativeButton("No",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();

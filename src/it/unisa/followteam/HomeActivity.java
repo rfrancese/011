@@ -38,6 +38,7 @@ public class HomeActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//salvo le info dell'utente che ha effettuato il login
 		String pkg = getPackageName();
 		ACCOUNT = (Account) getIntent()
 				.getSerializableExtra(pkg + ".myAccount");

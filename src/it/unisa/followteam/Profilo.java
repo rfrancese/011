@@ -41,7 +41,7 @@ public class Profilo extends Fragment {
 		final View rootView = inflater.inflate(R.layout.profilo, container,
 				false);
 		
-		getActivity().getActionBar().setTitle("Profilo");
+		getActivity().setTitle("Profilo");
 
 
 		TextView userProfilo = (TextView) rootView

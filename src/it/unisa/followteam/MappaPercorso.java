@@ -1,7 +1,6 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.database.MyDatabase;
-import it.unisa.followteam.support.Connessione;
 import it.unisa.followteam.support.GPSTracker;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,16 +16,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class MappaPercorso extends Fragment {
 
@@ -37,14 +39,14 @@ public class MappaPercorso extends Fragment {
 	private double myLong;
 	private Marker puntatore;
 	private View rootView;
-	String uriIniziale = "";
 	private String url = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.mappapercorso, container, false);
-		getActivity().getActionBar().setTitle("Mappa Percorso");
+
+		getActivity().setTitle("Mappa Percorso");
 
 		return rootView;
 	}
@@ -67,7 +69,8 @@ public class MappaPercorso extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
+
 		if (map == null) {
 
 			Bundle args = getArguments();
@@ -78,20 +81,31 @@ public class MappaPercorso extends Fragment {
 			final double longitudine = Double.parseDouble(args
 					.getString(MyDatabase.StadioMetaData.STADIO_LONG));
 			LatLng coordinateStadio = new LatLng(latitudine, longitudine);
-			gps = new GPSTracker(getActivity().getApplicationContext());
 
-			myLat = gps.getLatitude();
-			myLong = gps.getLongitude();
-			LatLng myPosizione = new LatLng(myLat, myLong);
-			map.addPolyline(new PolylineOptions()
-					.add(myPosizione, coordinateStadio).width(5)
-					.color(Color.RED));
+			gps = new GPSTracker(getActivity().getApplicationContext());
+			
+			//se non c'è connessione e il gps è disabilitato
+			if(!gps.canGetLocation()){
+				showAlterOpzioniGPS();
+			}else if(gps.getLocation() != null){ // se il segnale del gps non è stabile
+				
+				myLat = gps.getLatitude();
+				myLong = gps.getLongitude();
+				LatLng myPosizione = new LatLng(myLat, myLong);
+				map.addPolyline(new PolylineOptions()
+						.add(myPosizione, coordinateStadio).width(5)
+						.color(Color.RED));
+				map.setMyLocationEnabled(true);
+				final CameraPosition MYPOSIZIONE = new CameraPosition.Builder()
+						.target(myPosizione).zoom(5).bearing(0).tilt(25).build();
+	
+				map.animateCamera(CameraUpdateFactory
+						.newCameraPosition(MYPOSIZIONE));
+			}
 
 			int sqCasa = args.getInt(DettagliPartita.ICON_SQUADRA_CASA);
 			BitmapDescriptor icon = BitmapDescriptorFactory
 					.fromResource(sqCasa);
-			
-			map.setMyLocationEnabled(true);
 
 			puntatore = map.addMarker(new MarkerOptions().position(
 					coordinateStadio).title(
@@ -115,15 +129,34 @@ public class MappaPercorso extends Fragment {
 					return true;
 				}
 			});
-			
-			final CameraPosition MYPOSIZIONE = new CameraPosition.Builder()
-			.target(myPosizione).zoom(5).bearing(0).tilt(25)
-			.build();
-			
-			
-			map.animateCamera(CameraUpdateFactory.newCameraPosition(MYPOSIZIONE));
 
-			
 		}
+	}
+	
+	public void showAlterOpzioniGPS() {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(rootView.getContext());
+
+		alertDialog.setTitle("Opzioni GPS");
+
+		alertDialog
+				.setMessage("Il Gps è disabilitato. Vuoi attivarlo?");
+
+		alertDialog.setPositiveButton("Si",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(
+								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+						rootView.getContext().startActivity(intent);
+					}
+				});
+
+		alertDialog.setNegativeButton("No",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+
+		alertDialog.show();
 	}
 }

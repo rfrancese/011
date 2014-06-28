@@ -26,7 +26,7 @@ public class Classifica extends Fragment {
 			View viewConnessione = inflater.inflate(R.layout.controllo_connessione, container, false);
 			return viewConnessione;
 		}
-		getActivity().getActionBar().setTitle("Classifica");
+		getActivity().setTitle("Classifica");
 
 
 		WebView web = (WebView) rootView.findViewById(R.id.web);

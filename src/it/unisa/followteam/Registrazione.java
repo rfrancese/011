@@ -46,7 +46,8 @@ public class Registrazione extends Fragment {
 		
 		View rootView = inflater.inflate(R.layout.registrazione, container,
 				false);
-		getActivity().getActionBar().setTitle("Registrati");
+		
+		getActivity().setTitle("Registrati");
 
 		if (db == null)
 			db = new MyDatabase(rootView.getContext());

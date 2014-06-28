@@ -60,7 +60,7 @@ public class News extends Fragment {
 			return viewConnessione;
 		}
 
-		getActivity().getActionBar().setTitle("News");
+		getActivity().setTitle("News");
 
 		feedUrl = "http://www.gazzetta.it/rss/calcio.xml";
 

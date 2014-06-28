@@ -55,7 +55,7 @@ public class MappaAlloggio extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.mappaalloggio, container,
 				false);
-		getActivity().getActionBar().setTitle("Mappa Alloggio");
+		getActivity().setTitle("Mappa Alloggio");
 		return rootView;
 	}
 

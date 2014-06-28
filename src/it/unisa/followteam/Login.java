@@ -43,7 +43,7 @@ public class Login extends Fragment {
 		final View rootView = inflater
 				.inflate(R.layout.login, container, false);
 
-		getActivity().getActionBar().setTitle("Login");
+		getActivity().setTitle("Login");
 
 		Button buttonLogin = (Button) rootView.findViewById(R.id.buttonLogin);
 		editUser = (EditText) rootView.findViewById(R.id.username);
