@@ -21,7 +21,7 @@
     <string name="usernameLabel">Username</string>
     <string name="passwordLabel">Password</string>
     <string name="buttonLoginLabel">Login</string>
-    <string name="passwordLabelConferma">Conferma password</string>
+    <string name="passwordLabelConferma">ConfermaPassword</string>
     <string name="buttonRegistrati">Registrati</string>
 	<string name="benvenutoLabel">Benvenuto</string>
 	<string name="buttonModifica">Modifica profilo</string>
