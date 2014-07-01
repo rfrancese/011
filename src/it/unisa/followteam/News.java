@@ -1,13 +1,10 @@
 package it.unisa.followteam;
 
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -15,21 +12,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import it.unisa.followteam.support.Connessione;
 import it.unisa.followteam.support.RSSItem;
 
@@ -43,6 +34,7 @@ public class News extends Fragment {
 	private View rootView;
 	boolean connessioneDisponibile;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 

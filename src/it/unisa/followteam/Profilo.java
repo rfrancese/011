@@ -1,7 +1,6 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.database.HTTPPoster;
-import it.unisa.followteam.support.Account;
 import it.unisa.followteam.support.Connessione;
 
 import java.io.IOException;
@@ -20,21 +19,19 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Profilo extends Fragment {
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
@@ -77,6 +74,7 @@ public class Profilo extends Fragment {
 				.findViewById(R.id.buttonEliminaProfilo);
 		buttonElimina.setOnClickListener(new View.OnClickListener() {
 			// elimina l'istanza dal database
+			@Override
 			public void onClick(View v) {
 				
 				Connessione conn = new Connessione(getView().getContext());
@@ -101,6 +99,7 @@ public class Profilo extends Fragment {
 				alertDialog.setMessage("Sei sicuro di voler eliminare l'account ?");
 				// button si
 				alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog,int which) {
 						String user=HomeActivity.ACCOUNT.getUsername();
 						
@@ -110,6 +109,7 @@ public class Profilo extends Fragment {
 				});
 				// button no
 				alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();
 						}

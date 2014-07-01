@@ -16,17 +16,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +153,7 @@ public class MappaPercorso extends Fragment {
 
 		alertDialog.setPositiveButton("Si",
 				new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(
 								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -165,6 +163,7 @@ public class MappaPercorso extends Fragment {
 
 		alertDialog.setNegativeButton("No",
 				new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();
 						zoomSuStadio();

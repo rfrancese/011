@@ -48,6 +48,7 @@ public class Account implements Serializable {
 		this.squadra=squadra;
 	}
 	
+	@Override
 	public String toString(){
 		return getUsername()+"."+getPassword()+"."+getSquadra();
 	}

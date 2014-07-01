@@ -7,7 +7,6 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-      <!-- TODO: Replace "com.example.hellomap" with your package name -->
     <permission
             android:name="it.unisa.followteam.permission.MAPS_RECEIVE"
             android:protectionLevel="signature"/>

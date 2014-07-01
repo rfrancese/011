@@ -1,17 +1,16 @@
 package it.unisa.followteam;
 
 import it.unisa.followteam.support.Connessione;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 public class Classifica extends Fragment {
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 

@@ -47,6 +47,7 @@ public class Alloggio implements Serializable {
 		return indirizzo;
 	}
 
+	@Override
 	public String toString() {
 
 		return "latitudine: " + latitudine + " longitudine: " + longitudine

@@ -1,8 +1,6 @@
 package it.unisa.followteam.support;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 
 public class Connessione {

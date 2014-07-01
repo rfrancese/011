@@ -4,12 +4,7 @@ import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +25,7 @@ public class DettagliPartita extends Fragment {
 	private int iconSqCasa;
 	public static final String ICON_SQUADRA_CASA = "icona_sq_casa";
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
@@ -132,6 +128,7 @@ public class DettagliPartita extends Fragment {
 		buttonPercorso = (Button) rootView.findViewById(R.id.buttonPercorso);
 		buttonPercorso.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				
 				FragmentManager fragmentManager = getFragmentManager();

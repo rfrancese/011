@@ -13,6 +13,7 @@ public class CalendariOff extends Calendario {
 		super();
 	}
 
+	@Override
 	public void aggiungiSpecifiche() {
 		super.listaPartite.setOnItemClickListener(new MyListnerListView());
 		TextView label = (TextView) super.rootView.findViewById(R.id.benvenuto);

@@ -129,6 +129,7 @@ public class Registrazione extends Fragment {
 				Toast.makeText(getView().getContext(), result, Toast.LENGTH_LONG)
 				.show();
 		}
+		@Override
 		protected String doInBackground(String... params) {
 			
 			//prelevo le variabili da params

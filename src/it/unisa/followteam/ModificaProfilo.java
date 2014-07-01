@@ -3,8 +3,6 @@ package it.unisa.followteam;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
@@ -13,13 +11,11 @@ import org.json.JSONObject;
 
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
-import it.unisa.followteam.support.Account;
 import it.unisa.followteam.support.Connessione;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +35,7 @@ public class ModificaProfilo extends Fragment {
 	private EditText editPass, editPassConf;
 	private Spinner lista;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
@@ -112,6 +109,7 @@ public class ModificaProfilo extends Fragment {
 			alertDialog.setMessage("Sei sicuro di voler modificare l'account ?");
 			// button si
 			alertDialog.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog,int which) {
 					String pass = editPass.getText().toString();
 					String confPass = editPassConf.getText().toString();
@@ -134,6 +132,7 @@ public class ModificaProfilo extends Fragment {
 			});
 			// button no
 			alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.cancel();
 					}

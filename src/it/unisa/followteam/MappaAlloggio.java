@@ -2,8 +2,6 @@ package it.unisa.followteam;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.util.EntityUtils;
@@ -14,8 +12,6 @@ import org.json.JSONObject;
 import it.unisa.followteam.database.HTTPPoster;
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.support.Alloggio;
-import it.unisa.followteam.support.Connessione;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
@@ -27,21 +23,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Camera;
-import android.hardware.GeomagneticField;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class MappaAlloggio extends Fragment {
 
