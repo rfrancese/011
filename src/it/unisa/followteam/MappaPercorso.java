@@ -1,7 +1,12 @@
 package it.unisa.followteam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.unisa.followteam.database.MyDatabase;
 import it.unisa.followteam.support.GPSTracker;
+import it.unisa.followteam.support.HttpConnection;
+import it.unisa.followteam.support.PathJSONParser;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -28,6 +34,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
 
 public class MappaPercorso extends Fragment {
 
@@ -40,6 +50,8 @@ public class MappaPercorso extends Fragment {
 	private View rootView;
 	private String url = "";
 	private LatLng coordinateStadio;
+	private double latitudine;
+	private double longitudine;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,32 +85,35 @@ public class MappaPercorso extends Fragment {
 		Bundle args = getArguments();
 		map = fragment.getMap();
 
-		final double latitudine = Double.parseDouble(args
+		 latitudine = Double.parseDouble(args
 				.getString(MyDatabase.StadioMetaData.STADIO_LAT));
-		final double longitudine = Double.parseDouble(args
+		longitudine = Double.parseDouble(args
 				.getString(MyDatabase.StadioMetaData.STADIO_LONG));
+		
 		coordinateStadio = new LatLng(latitudine, longitudine);
 
 		gps = new GPSTracker(getActivity().getApplicationContext());
 
 		// se non c'è connessione e il gps è disabilitato
 		if (!gps.canGetLocation()) {
-			showAlterOpzioniGPS();
-		} else if (gps.getLocation() != null) { // se il segnale del gps è
+			showAlertOpzioniGPS();
+		}else if (gps.getLocation() != null) { // se il segnale del gps è
 												// stabile
 
 			myLat = gps.getLatitude();
 			myLong = gps.getLongitude();
-			LatLng myPosizione = new LatLng(myLat, myLong);
-			map.addPolyline(new PolylineOptions()
-					.add(myPosizione, coordinateStadio).width(5)
-					.color(Color.RED));
+			LatLng miaPosizione = new LatLng(myLat, myLong);
 			map.setMyLocationEnabled(true);
 			final CameraPosition MYPOSIZIONE = new CameraPosition.Builder()
-					.target(myPosizione).zoom(5).bearing(0).tilt(25).build();
+					.target(miaPosizione).zoom(5).bearing(0).tilt(25).build();
 
 			map.animateCamera(CameraUpdateFactory
 					.newCameraPosition(MYPOSIZIONE));
+			
+			String urlPolyline = getMapsApiDirectionsUrl();
+			ReadTask downloadTask = new ReadTask();
+			downloadTask.execute(urlPolyline);
+
 		} else { // gps instabile
 			Toast.makeText(
 					rootView.getContext(),
@@ -136,6 +151,19 @@ public class MappaPercorso extends Fragment {
 
 	}
 
+	private String getMapsApiDirectionsUrl() {
+		String waypoints = "waypoints=optimize:true|" + myLat
+				+ "," + myLong + "|" + "|"
+				+ latitudine + "," + longitudine;
+
+		String sensor = "sensor=false";
+		String params = waypoints + "&" + sensor;
+		String output = "json";
+		String url = "https://maps.googleapis.com/maps/api/directions/"
+				+ output + "?" + params;
+		return url;
+	}
+
 	public void zoomSuStadio() {
 		final CameraPosition MYSTADIO = new CameraPosition.Builder()
 				.target(coordinateStadio).zoom(5).bearing(0).tilt(25).build();
@@ -143,7 +171,7 @@ public class MappaPercorso extends Fragment {
 		map.animateCamera(CameraUpdateFactory.newCameraPosition(MYSTADIO));
 	}
 
-	public void showAlterOpzioniGPS() {
+	public void showAlertOpzioniGPS() {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 				rootView.getContext());
 
@@ -176,5 +204,75 @@ public class MappaPercorso extends Fragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+	}
+
+	private class ReadTask extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... url) {
+			String data = "";
+			try {
+				HttpConnection http = new HttpConnection();
+				data = http.readUrl(url[0]);
+			} catch (Exception e) {
+			}
+			return data;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			new ParserTask().execute(result);
+		}
+
+		private class ParserTask extends
+				AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+			@Override
+			protected List<List<HashMap<String, String>>> doInBackground(
+					String... jsonData) {
+
+				JSONObject jObject;
+				List<List<HashMap<String, String>>> routes = null;
+
+				try {
+					jObject = new JSONObject(jsonData[0]);
+					PathJSONParser parser = new PathJSONParser();
+					routes = parser.parse(jObject);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return routes;
+			}
+
+			@Override
+			protected void onPostExecute(
+					List<List<HashMap<String, String>>> routes) {
+				ArrayList<LatLng> points = null;
+				PolylineOptions polyLineOptions = null;
+
+				// traversing through routes
+				for (int i = 0; i < routes.size(); i++) {
+					points = new ArrayList<LatLng>();
+					polyLineOptions = new PolylineOptions();
+					List<HashMap<String, String>> path = routes.get(i);
+
+					for (int j = 0; j < path.size(); j++) {
+						HashMap<String, String> point = path.get(j);
+
+						double lat = Double.parseDouble(point.get("lat"));
+						double lng = Double.parseDouble(point.get("lng"));
+						LatLng position = new LatLng(lat, lng);
+
+						points.add(position);
+					}
+
+					polyLineOptions.addAll(points);
+					polyLineOptions.width(2);
+					polyLineOptions.color(Color.BLUE);
+				}
+
+				map.addPolyline(polyLineOptions);
+			}
+		}
 	}
 }
