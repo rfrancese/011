@@ -1,98 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/TableLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginLeft="50dp" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" >
+    <TableLayout
+        android:id="@+id/TableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textViewPassword"
-            style="@style/MyEditText"
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="@string/passwordLabel"
-             />
-        <EditText
-            android:id="@+id/confermaPassProfilo"
-            style="@style/MyEditText"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/textViewPassword"
+                style="@style/MyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="@string/passwordLabel" />
+
+            <EditText
+                android:id="@+id/confermaPassProfilo"
+                style="@style/MyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_marginBottom="10dp" >
 
-    </TableRow>
+            <TextView
+                android:id="@+id/textViewConfermaPass"
+                style="@style/MyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="@string/passwordLabelConferma" />
 
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" >
-         <TextView
-            android:id="@+id/textViewConfermaPass"
-            style="@style/MyEditText"
+            <EditText
+                android:id="@+id/modPassProfilo"
+                style="@style/MyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="@string/passwordLabelConferma"
-             />
+            android:layout_marginBottom="10dp" >
 
-        <EditText
-            android:id="@+id/modPassProfilo"
-            style="@style/MyEditText"
+            <TextView
+                android:id="@+id/modificaSquadraProfilo"
+                style="@style/MyEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:text="Scegli squadra" />
+
+            <Spinner
+                android:id="@+id/spinnerModificaProfilo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:layout_marginBottom="35dp"
+            android:gravity="center" >
 
-    </TableRow>
+            <Button
+                android:id="@+id/buttonConfermaModifica"
+                style="@style/button"
+                android:layout_width="90dp"
+                android:layout_height="65dp"
+                android:text="@string/buttonConfermaModifica" />
+        </TableRow>
+    </TableLayout>
 
-    <TableRow
-        android:id="@+id/tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" >
-         <TextView
-            android:id="@+id/modificaSquadraProfilo"
-            style="@style/MyEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Scegli squadra"
-            android:layout_gravity="center"
-             />
-
-        <Spinner
-            android:id="@+id/spinnerModificaProfilo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-             />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="35dp" >
-
-        <Button
-            android:id="@+id/buttonConfermaModifica"
-            style="@style/button"
-            android:layout_width="90dp"
-            android:layout_height="65dp"
-            android:text="@string/buttonConfermaModifica" />
-
-    </TableRow>
-
-</TableLayout>
+</ScrollView>

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView1"
+<ScrollView android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        
-	<LinearLayout
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:layout_gravity="center_horizontal"
-	    android:layout_marginTop="10dp"
-	    android:layout_marginBottom="15dp">
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
 	
 	    <EditText
 	        android:id="@+id/usernameReg"
@@ -33,32 +31,40 @@
 	        android:inputType="textPassword" 
 	        android:layout_marginBottom="20dp"
 	        style="@style/MyEditText"/>
-	
+
 	    <EditText
 	        android:id="@+id/passwordConferma"
-	        android:hint="@string/passwordLabelConferma"
+	        style="@style/MyEditText"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:ems="10"
-	        android:inputType="textPassword" 
 	        android:layout_marginBottom="20dp"
-	        style="@style/MyEditText"/>
-	
+	        android:ems="10"
+	        android:hint="@string/passwordLabelConferma"
+	        android:inputType="textPassword" >
+
+	        <requestFocus />
+	    </EditText>
+
+	    <TextView
+	        android:id="@+id/textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/squadraPreferita" />
+
 	    <Spinner
 	        android:id="@+id/spinner"
-	        android:layout_width="fill_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:drawSelectorOnTop="true" 
 	        android:layout_marginBottom="20dp"
-	        />
-	
+	        android:layout_weight="1"
+	        android:drawSelectorOnTop="true" />
+
 	    <Button
 	        android:id="@+id/buttonRegistrazione"
-	        android:text="@string/buttonRegistrati"
-	        android:layout_height="90dp"
-	        android:layout_width="110dp"
 	        style="@style/button"
-	        android:layout_gravity="center" />
+	        android:layout_width="110dp"
+	        android:layout_height="90dp"
+	        android:text="@string/buttonRegistrati" />
 	
 	</LinearLayout>
 </ScrollView>
