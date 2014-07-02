@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,74 +205,72 @@ public class MappaPercorso extends Fragment {
 	public void onPause() {
 		super.onPause();
 	}
-
+	
 	private class ReadTask extends AsyncTask<String, Void, String> {
-		@Override
-		protected String doInBackground(String... url) {
-			String data = "";
-			try {
-				HttpConnection http = new HttpConnection();
-				data = http.readUrl(url[0]);
-			} catch (Exception e) {
-			}
-			return data;
-		}
+	    @Override
+	    protected String doInBackground(String... url) {
+	      String data = "";
+	      try {
+	        HttpConnection http = new HttpConnection();
+	        data = http.readUrl(url[0]);
+	      } catch (Exception e) {
+	      }
+	      return data;
+	    }
 
-		@Override
-		protected void onPostExecute(String result) {
-			super.onPostExecute(result);
-			new ParserTask().execute(result);
-		}
+	    @Override
+	    protected void onPostExecute(String result) {
+	      super.onPostExecute(result);
+	      new ParserTask().execute(result);
+	    }
+	  }
 
-		private class ParserTask extends
-				AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+	  private class ParserTask extends
+	      AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
-			@Override
-			protected List<List<HashMap<String, String>>> doInBackground(
-					String... jsonData) {
+	    @Override
+	    protected List<List<HashMap<String, String>>> doInBackground(
+	        String... jsonData) {
 
-				JSONObject jObject;
-				List<List<HashMap<String, String>>> routes = null;
+	      JSONObject jObject;
+	      List<List<HashMap<String, String>>> routes = null;
 
-				try {
-					jObject = new JSONObject(jsonData[0]);
-					PathJSONParser parser = new PathJSONParser();
-					routes = parser.parse(jObject);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return routes;
-			}
+	      try {
+	        jObject = new JSONObject(jsonData[0]);
+	        PathJSONParser parser = new PathJSONParser();
+	        routes = parser.parse(jObject);
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	      }
+	      return routes;
+	    }
 
-			@Override
-			protected void onPostExecute(
-					List<List<HashMap<String, String>>> routes) {
-				ArrayList<LatLng> points = null;
-				PolylineOptions polyLineOptions = null;
+	    @Override
+	    protected void onPostExecute(List<List<HashMap<String, String>>> routes) {
+	      ArrayList<LatLng> points = null;
+	      PolylineOptions polyLineOptions = null;
+	      
+	      // traversing through routes
+	      for (int i = 0; i < routes.size(); i++) {
+	        points = new ArrayList<LatLng>();
+	        polyLineOptions = new PolylineOptions();
+	        List<HashMap<String, String>> path = routes.get(i);
 
-				// traversing through routes
-				for (int i = 0; i < routes.size(); i++) {
-					points = new ArrayList<LatLng>();
-					polyLineOptions = new PolylineOptions();
-					List<HashMap<String, String>> path = routes.get(i);
+	        for (int j = 0; j < path.size(); j++) {
+	          HashMap<String, String> point = path.get(j);
 
-					for (int j = 0; j < path.size(); j++) {
-						HashMap<String, String> point = path.get(j);
+	          double lat = Double.parseDouble(point.get("lat"));
+	          double lng = Double.parseDouble(point.get("lng"));
+	          LatLng position = new LatLng(lat, lng);
 
-						double lat = Double.parseDouble(point.get("lat"));
-						double lng = Double.parseDouble(point.get("lng"));
-						LatLng position = new LatLng(lat, lng);
+	          points.add(position);
+	        }
 
-						points.add(position);
-					}
-
-					polyLineOptions.addAll(points);
-					polyLineOptions.width(2);
-					polyLineOptions.color(Color.BLUE);
-				}
-
-				map.addPolyline(polyLineOptions);
-			}
-		}
-	}
+	        polyLineOptions.addAll(points);
+	        polyLineOptions.width(10);
+	        polyLineOptions.color(Color.RED);
+	      }
+	      map.addPolyline(polyLineOptions);
+	    }
+	  }
 }
