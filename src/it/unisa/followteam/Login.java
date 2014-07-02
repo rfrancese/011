@@ -70,6 +70,15 @@ public class Login extends Fragment {
 							Toast.LENGTH_LONG).show();
 					return;
 				}
+				
+				if(pass.equals("") || pass.equals(" ")){
+					Toast.makeText(
+							getView().getContext(),
+							"Il campo password non puo' essere vuoto",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+					
 
 				sdts.execute(user, pass);
 			}

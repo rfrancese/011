@@ -34,7 +34,7 @@ public class Registrazione extends Fragment {
 	private final static String ERRORE_PASS_CONFERMA = "Le password non coincidono";
 	private final static String ERRORE_EMPTY = "Il nome utente o la password non possono essere vuoti";
 	private final static String ERRORE_PASS_USER_UGUALI ="La password non puo' coincidere con l'username";
-	private final static String ERRORE_PASS_USER_SMALL ="La password e l'username devono avere almeno 6 caratteri";
+	private final static String ERRORE_PASS_USER_SMALL ="La password e l'username devono essere almeno di 6 caratteri";
 
 
 	private Spinner lista;
