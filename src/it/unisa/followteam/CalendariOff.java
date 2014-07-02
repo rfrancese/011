@@ -24,8 +24,8 @@ public class CalendariOff extends Calendario {
 		imageTeam.setImageResource(android.R.color.transparent);
 		user.setText("");
 		label.setText("Registrati!\n"
-				+ "Potrai tracciare il percorso dalla tua posizione\n "
-				+ "alla posizione dello stadio!");
+				+ "Potrai tracciare il percorso dalla tua posizione "
+				+ "alla posizione dello stadio, e ricercare gli hotel e i b&b nei pressi dello stadio!");
 
 	}
 
