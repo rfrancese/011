@@ -32,7 +32,10 @@ public class Registrazione extends Fragment {
 
 	private MyDatabase db;
 	private final static String ERRORE_PASS_CONFERMA = "Le password non coincidono";
-	private final static String ERRORE_USER = "Il nome utente o la password non possono essere vuoti";
+	private final static String ERRORE_EMPTY = "Il nome utente o la password non possono essere vuoti";
+	private final static String ERRORE_PASS_USER_UGUALI ="La password non puo' coincidere con l'username";
+	private final static String ERRORE_PASS_USER_SMALL ="La password e l'username devono avere almeno 6 caratteri";
+
 
 	private Spinner lista;
 	private EditText editUser, editPass, editPassConf;
@@ -94,16 +97,26 @@ public class Registrazione extends Fragment {
 
 				SendDataToServer sdts = new SendDataToServer();
 				
-				//se le password coincidono eseguo l'asyncTask
-				if((!user.equals("")) && !(pass.equals(""))){
-					if(pass.equals(passConf)){
-							sdts.execute(user,pass,team);
+				
+				if((!user.equals("")) && !(pass.equals(""))){ // i campi user e pass non sono vuoti
+					if(pass.equals(passConf)){ // la password inserita è uguale a quella confermata
+						if(!(pass.equals(user))){// la password non è uguale all'username
+							if(pass.length() > 5 && user.length() > 5){
+								sdts.execute(user,pass,team);
+							}else{
+								Toast.makeText(getView().getContext(), ERRORE_PASS_USER_SMALL,
+										Toast.LENGTH_LONG).show();
+							}
+						}else{
+							Toast.makeText(getView().getContext(), ERRORE_PASS_USER_UGUALI,
+									Toast.LENGTH_LONG).show();
+						}
 					}else{
 							Toast.makeText(getView().getContext(), ERRORE_PASS_CONFERMA,
 								Toast.LENGTH_LONG).show();
 					}
 				}else{
-					Toast.makeText(getView().getContext(), ERRORE_USER,
+					Toast.makeText(getView().getContext(), ERRORE_EMPTY,
 							Toast.LENGTH_LONG).show();
 				}
 			}
