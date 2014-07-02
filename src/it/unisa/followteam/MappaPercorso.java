@@ -134,8 +134,7 @@ public class MappaPercorso extends Fragment {
 
 		map.setOnMarkerClickListener(new OnMarkerClickListener() {
 
-			// traccia il percorso dalla propria posizione allo stadio
-			// tramite maps
+			// traccia il percorso dalla propria posizione allo stadio tramite maps
 			@Override
 			public boolean onMarkerClick(Marker marker) {
 				url = "http://maps.google.com/maps?f=d&daddr=" + latitudine
