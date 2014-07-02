@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import it.unisa.followteam.support.Connessione;
 import it.unisa.followteam.support.RSSItem;
 
@@ -30,7 +32,6 @@ public class News extends Fragment {
 	private ListView rssListView = null;
 	private ArrayList<RSSItem> RSSItems = new ArrayList<RSSItem>();
 	private ArrayAdapter<RSSItem> array_adapter = null;
-	private RSSParseHandler rssparsehandler = new RSSParseHandler();
 	private View rootView;
 	boolean connessioneDisponibile;
 
@@ -61,15 +62,13 @@ public class News extends Fragment {
 		array_adapter = new ArrayAdapter<RSSItem>(rootView.getContext(),
 				R.layout.list_item, RSSItems);
 		rssListView.setAdapter(array_adapter);
-		refreshLista();
+		RSSParseHandler rssparsehandler = new RSSParseHandler();
+		rssparsehandler.execute(feedUrl);
 
 		return rootView;
 
 	}
 
-	private void refreshLista() {
-		rssparsehandler.execute(feedUrl);
-	}
 
 	private class RSSParseHandler extends
 			AsyncTask<String, Void, ArrayList<RSSItem>> {
@@ -150,8 +149,10 @@ public class News extends Fragment {
 				}
 
 			} catch (Exception e) {
-
-				e.printStackTrace();
+				Toast.makeText(
+						getView().getContext(),
+						"Errore nel reperire le news da gazzetta.it",
+						Toast.LENGTH_LONG).show();
 
 			}
 
